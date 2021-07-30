@@ -1,12 +1,13 @@
 import React from 'react' 
-// import {connect} from 'react-redux'
+import Wishlist from "./Wishlist.js"
+import {connect} from 'react-redux'
 
 const MainContainer = () => {
     return (
         <div className="mainContainer">
-            
+            <Wishlist />
         </div>
     )
 }
 
-export default (MainContainer)
+export default MainContainer
