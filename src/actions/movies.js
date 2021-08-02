@@ -5,7 +5,7 @@ export const setMovies = movies =>{
     }
 }
 
-export const geMovies = () => {
+export const getMovies = () => {
     return dispatch => { 
         return fetch("http://localhost:3000/api/v1/movies", {
             credentials: "include",

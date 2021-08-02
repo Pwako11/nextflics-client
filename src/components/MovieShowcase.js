@@ -1,27 +1,28 @@
 import React from 'react';
 import {connect} from 'react-redux'
-// import MovieCard from './card-components/MovieCard.js'
+import MovieCard from './MovieCard.js'
+import {getMovies} from '../actions/movies'
 
-const generateMovieCards = (props) => {
-  console.log("here are your Movie props", props)
-    // map over your movieData array and return an array of the correct JSX
-    // const moviecards = movieData.map((movie, i) => {
-    //   <MovieCard key={i} {...movie} />
-    //   })
-    return (
-      <div></div>
-    )
-  }
+const MovieShowcase = ({cards}) => {
+   console.log("Here are your cards", cards)
+   cards.forEach(list => console.log(list))
+  const movieCard = cards.length > 0 ? cards.map(  function(list) {
+  return <MovieCard key={list.id} card={list}/>
+ })
+   : null
+  console.log( "here is single movie", movieCard)
+  return (
+      movieCard
+  )
+}
 
-// return (
-//     <div id="movie-showcase">
-//     {this.generateMovieCards()}
-//     </div>
-// )
+const mapStateToProps = (state) => {
+  console.log( "In movies state", state)
+  console.log( "In movies state", state.movies)
+ 
 
-const mapStateToProps = state => {
     return {
-        generateMovieCards: state.generateMovieCards
+        state
     }
 }
-export default connect(mapStateToProps)(generateMovieCards)
+export default connect(mapStateToProps) (MovieShowcase)

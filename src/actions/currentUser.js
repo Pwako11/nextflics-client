@@ -3,7 +3,6 @@ import { getWishlist, clearWishlist } from "./wishlist.js"
 import {resetSignupForm} from "./signupForm.js"
 
 export const setCurrentUser = user =>{
-    // console.log("Dispatch for setting current user", user)
     return {
         type: "SET_CURRENT_USER",
         user
@@ -94,12 +93,10 @@ export const getCurrentUser = () =>{
         })
         .then( response => response.json())
         .then(response =>{
-            console.log( "Current User fetch response", response)
             if(response.error){
                 alert(response.error)
             }else{
                 dispatch(setCurrentUser(response))
-                // console.log("in get current user fetch", response)
                 dispatch(getWishlist())
             }
         })

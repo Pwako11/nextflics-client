@@ -6,6 +6,7 @@ import loginForm from './reducers/loginForm.js';
 import wishlist from './reducers/wishlist.js';
 import signupForm from  './reducers/signupForm.js';
 import newWishlistForm from './reducers/newWishlistForm.js';
+import movieReducer from './reducers/movies.js';
 
 const reducer = combineReducers({
     users: usersReducer,
@@ -13,7 +14,8 @@ const reducer = combineReducers({
     loginForm,
     wishlist, 
     signupForm, 
-    newWishlistForm
+    newWishlistForm,
+    movies: movieReducer
   })
   
   const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
