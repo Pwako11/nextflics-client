@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 const wishlist = ({wishlists}) => {
  
     const wishlistCards = wishlists.length > 0 ? 
-    wishlists.map(list => <Link key={list.id} to={`/wishlist/${list.id}`}> {list.attributes.name} </Link>) : null
+    wishlists.map(list => (<> <Link key={list.id} to={`/wishlists/${list.id}`}> {list.attributes.name} </Link><br/></>)) : null
     
     return (
         wishlistCards

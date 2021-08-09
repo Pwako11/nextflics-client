@@ -1,6 +1,8 @@
 import { resetLoginForm } from "./loginForm.js"
 import { getWishlist, clearWishlist } from "./wishlist.js"
 import {resetSignupForm} from "./signupForm.js"
+import {getReviews, clearReview} from "./reviews.js"
+import {getRecommendations, clearRecommendation} from "./recommendations.js"
 
 export const setCurrentUser = user =>{
     return {
@@ -35,6 +37,8 @@ export const signup = (credentials, history) => {
             }else{
                 dispatch(setCurrentUser(response))
                 dispatch(getWishlist())
+                dispatch(getReviews())
+                dispatch(getRecommendations())
                 dispatch(resetSignupForm())
                 history.push('/')
             }
@@ -44,7 +48,6 @@ export const signup = (credentials, history) => {
 }
 
 export const login = (credentials, history) => {
-    console.log("Credentials are", credentials)
     return dispatch => {
         return fetch("http://localhost:3000/api/v1/login", {
             credentials: "include",
@@ -56,12 +59,13 @@ export const login = (credentials, history) => {
         })
         .then( response => response.json())
         .then(response =>{
-            console.log( "this the fetch return for user", response)
             if(response.error){
                 alert(response.error)
             }else{
                 dispatch(setCurrentUser(response))
                 dispatch(getWishlist())
+                dispatch(getReviews())
+                dispatch(getRecommendations())
                 dispatch(resetLoginForm())
                 history.push('/')
             }
@@ -73,7 +77,9 @@ export const login = (credentials, history) => {
 export const logout = () =>{
    return dispatch =>{
     dispatch(clearCurrentUser())
-    // dispatch (clearWishlist())
+    dispatch(clearWishlist())
+    dispatch(clearReview())
+    dispatch(clearRecommendation()) 
     return fetch("http://localhost:3000/api/v1/logout", {
         credentials: "include",
         method: "DELETE"
@@ -82,7 +88,7 @@ export const logout = () =>{
 }
     
 export const getCurrentUser = () =>{
-    console.log("Dispatching get current user")
+
     return dispatch => {
         return fetch("http://localhost:3000/api/v1/get_current_user", {
             credentials: "include",
@@ -97,6 +103,8 @@ export const getCurrentUser = () =>{
                 alert(response.error)
             }else{
                 dispatch(setCurrentUser(response))
+                dispatch(getRecommendations())
+                dispatch(getReviews())
                 dispatch(getWishlist())
             }
         })

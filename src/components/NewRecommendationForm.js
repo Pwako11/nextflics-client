@@ -1,27 +1,29 @@
 import React from 'react' ;
 import {connect} from 'react-redux';
-import {updateNewWishlistForm} from "../actions/newWishlistForm.js";
-import {createWishlist} from "../actions/wishlist.js";
+import {updateNewRecommendationForm} from "../actions/newRecommendationForm.js";
+import {createRecommendation} from "../actions/recommendations.js";
 // import {Link} from 'react-router-dom'
 
-const NewWishlistForm = ({updateNewWishlistFormData, history, updateNewWishlistForm, createWishlist, userId}) => {
-   
-    const {name, user_id, movie_id} = updateNewWishlistFormData
+const NewRecommendationForm = ({updateNewRecommendationFormData, history, updateNewRecommendationForm, createRecommendation, userId}) => {
+    console.log( "here is the FormData prop from state", updateNewRecommendationFormData)
+    const {name, user_id, movie_id} = updateNewRecommendationFormData
 
     const handleChange=(event)=>{
-        console.log("trigger wishlistform handle change")
+        console.log("trigger recommendationform handle change")
         const {name, value} = event.target
-        updateNewWishlistForm(name, value)
+        updateNewRecommendationForm(name, value)
     } 
 
     const handleSubmit = event =>{
+        
+        console.log("inside Handle submit", updateNewRecommendationForm)
+        
         event.preventDefault()
-        createWishlist({
-            ...updateNewWishlistFormData,
-            userId
-        },
+        createRecommendation( 
+            updateNewRecommendationFormData,
             history
         )
+        
     } 
 
     return(
@@ -50,19 +52,19 @@ const NewWishlistForm = ({updateNewWishlistFormData, history, updateNewWishlistF
         />
         <br/>
         
-        <input type="submit" value="Add to wishlist" />
+        <input type="submit" value="Add to Recommendations" />
     </form> 
     )
 };
 
 const mapStateToProps = state => {
- 
     const userId = state.currentUser ? state.currentUser.data.id : ""
     return {
-        updateNewWishlistFormData: state.newWishlistForm,
+        updateNewRecommendationFormData: state.newRecommendationForm,
         userId
     }
+    
 }
 
 
-export default connect(mapStateToProps, {updateNewWishlistForm, createWishlist}) (NewWishlistForm);
+export default connect(mapStateToProps, {updateNewRecommendationForm, createRecommendation}) (NewRecommendationForm);

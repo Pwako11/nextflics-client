@@ -3,12 +3,10 @@ import {Link} from 'react-router-dom'
 
 const WishlistCard = ({card}) => {
 
-    console.log( "wishlist card ", card)
-
     return (
         <div>
-            {/* <p>{card.name}</p>
-            <Link to={`/wishlist/${card.id}/edit`}>Edit this wishlist</Link> */}
+            <p>{card.attributes.name}</p>
+            <Link to={`/wishlists/${card.id}/edit`}>Edit this wishlist</Link>
         </div>
 
     )

@@ -1,6 +1,6 @@
 import { resetNewWishlistForm } from "./newWishlistForm.js"
 
-// synchronous actions
+// sync actions
 
 export const setWishlist = wishlist =>{
     return {
@@ -76,7 +76,7 @@ export const createWishlist = (wishlistData, credentials, history) => {
                 dispatch(addWishlist(response))
                 dispatch(setWishlist(response))
                 dispatch(resetNewWishlistForm())
-                history.push('/wishlist/${response.data.id')
+                history.push(`/wishlists/${response.data.id}`)
             }
         })
         .catch(console.log)
