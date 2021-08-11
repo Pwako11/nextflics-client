@@ -1,7 +1,7 @@
 import React from 'react' ;
 import {connect} from 'react-redux';
-import {updateNewWishlistForm} from "../actions/newWishlistForm.js";
-import {createWishlist} from "../actions/wishlist.js";
+import {updateNewWishlistForm} from "../../actions/newWishlistForm.js";
+import {createWishlist} from "../../actions/wishlist.js";
 // import {Link} from 'react-router-dom'
 
 const NewWishlistForm = ({updateNewWishlistFormData, history, updateNewWishlistForm, createWishlist, userId}) => {

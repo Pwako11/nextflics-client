@@ -1,7 +1,7 @@
 import React from 'react' ;
 import {connect} from 'react-redux';
-import {updateNewRecommendationForm} from "../actions/newRecommendationForm.js";
-import {createRecommendation} from "../actions/recommendations.js";
+import {updateNewRecommendationForm} from "../../actions/newRecommendationForm.js";
+import {createRecommendation} from "../../actions/recommendations.js";
 // import {Link} from 'react-router-dom'
 
 const NewRecommendationForm = ({updateNewRecommendationFormData, history, updateNewRecommendationForm, createRecommendation, userId}) => {

@@ -1,6 +1,6 @@
 import React from 'react' ;
 import {connect} from 'react-redux';
-import {updateReviewForm} from "../actions/reviewForm.js";
+import {updateReviewForm} from "../../actions/reviewForm.js";
 
 // import {Link} from 'react-router-dom'
 

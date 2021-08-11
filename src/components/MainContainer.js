@@ -1,8 +1,8 @@
 import React from 'react' 
-import Wishlist from "./Wishlist.js"
-import Recommendation from './Recommendation.js'
-import Reviews from './Review.js'
-import {connect} from 'react-redux'
+import Wishlist from "./wishlists/Wishlist.js"
+import Recommendation from './recommendations/Recommendation.js'
+import Reviews from './reviews/Review.js'
+// import {connect} from 'react-redux'
 
 const MainContainer = () => {
     return (

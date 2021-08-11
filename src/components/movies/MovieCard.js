@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import NewWishlistForm from './NewWishlistForm.js';
+// import NewWishlistForm from './NewWishlistForm.js';
 import {connect} from "react-redux"
-import {Link} from 'react-router-dom';
 import {withRouter} from 'react-router-dom';
 // import CardFront from './CardFront.js';
 // import CardBack from './CardBack.js';
 
-const MovieCard = ({card, history}) => {
+const MovieCard = ({card, history, updateLikes}) => {
     
     const parentPointer = history.location.pathname
     const movieID = card.id
     const wishlistPath = `/wishlists/${movieID}/edit`
     const reviewPath = `/reviews/${movieID}/edit`
+    const newReviewPath = '/reviews/new'
     const recommendationPath = `/recommendations/${movieID}/edit`
     
     const wishlistRouteChange = () =>{
@@ -19,7 +19,9 @@ const MovieCard = ({card, history}) => {
     }
     
     const reviewRouteChange = () =>{
-        history.push(reviewPath)
+        history.push(newReviewPath, {
+            movieID: movieID
+        })
     }
 
     const recommendationRouteChange = () =>{
@@ -38,6 +40,9 @@ const MovieCard = ({card, history}) => {
             <h5>rating:{card.rating}</h5>
             <h5>release date:{card.release_date}</h5>  
             <p>overview:{card.overview}</p>
+            <p>{card.likes} Likes </p>
+            
+            <button className="movie_like_btn" onClick={() =>card.updateLikes(card.id)}>Like {'<3'}</button>
             
             <button className="movie_selector_button" onClick={wishlistRouteChange}>Add to Wishlist </button>
             <button className="movie_selector_button" onClick={reviewRouteChange}>Write a Review </button> 

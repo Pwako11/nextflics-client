@@ -27,10 +27,11 @@ export const updateReviewSuccess = review => {
         review
     }
 }
+
 // async actions
 export const getReviews = () =>{
     return dispatch =>{
-        return fetch("http://localhost:3000/api/v1/reviews", {
+        return fetch("http://localhost:3010/api/v1/reviews", {
             credentials: "include",
             method: "GET",
             headers:{
@@ -49,22 +50,19 @@ export const getReviews = () =>{
     }
 }
 
-export const createReview = (reviewData, credentials, history) => {
-  console.log("in  review create- history", history)
-    return dispatch => {
-        const userInfo = {
-            user: credentials 
-        } 
+export const createReview = (reviewData, userId, movieID) => {
+  console.log("in  review create- userId", userId)
+    return dispatch => { 
         const setDataTransfer ={
             review: {
                 content: reviewData.content,
                 rate: reviewData.rate,
-                user_id: reviewData.user_id,
-                movie_id: reviewData.movie_id
+                user_id: userId,
+                movie_id: movieID
             }
         }
         
-        return fetch("http://localhost:3000/api/v1/reviews", {
+        return fetch("http://localhost:3010/api/v1/reviews", {
             credentials: "include",
             method: "POST",
             headers:{
@@ -81,7 +79,7 @@ export const createReview = (reviewData, credentials, history) => {
                 dispatch(addReview(response))
                 dispatch(setReview(response))
                 dispatch(resetReviewForm ())
-                // history.push(`/reviews/${response.data.id}`)
+                return response.data.id
             }
         })
         .catch(console.log)
@@ -103,7 +101,7 @@ export const updateReview = (reviewData, credentials, history) => {
               }
           }
           
-          return fetch(`http://localhost:3000/api/v1/reviews/${reviewData.id}`, {
+          return fetch(`http://localhost:3010/api/v1/reviews/${reviewData.id}`, {
               credentials: "include",
               method: "PATCH",
               headers:{

@@ -1,6 +1,6 @@
 import React from 'react' ;
-import Signup from "./Signup.js";
-import Login from "./Login.js";
+import Signup from "./users/Signup.js";
+import Login from "./users/Login.js";
 import {Link} from 'react-router-dom'
 
 const Home = ({}) => (

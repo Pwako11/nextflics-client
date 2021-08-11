@@ -7,7 +7,7 @@ export const setMovies = movies =>{
 
 export const getMovies = () => {
     return dispatch => { 
-        return fetch("http://localhost:3000/api/v1/movies", {
+        return fetch("http://localhost:3010/api/v1/movies", {
             credentials: "include",
             method: "GET",
             headers:{
@@ -16,7 +16,6 @@ export const getMovies = () => {
         })
         .then( response => response.json())
         .then(response =>{
-            console.log("movie fetch", response)
             if(response.error){
                 alert(response.error)
             }else{
@@ -29,7 +28,7 @@ export const getMovies = () => {
 
 // export const UpdateMovieRating = () => {
 //     return dispatch => {
-//         return fetch("http://localhost:3000/api/v1/movies", {
+//         return fetch("http://localhost:3010/api/v1/movies", {
 //             method: "POST",
 //             headers:{
 //                 "Content-Type": "application/json"
@@ -47,4 +46,27 @@ export const getMovies = () => {
 //         })
 //         .catch(console.log)
 //     }
+// }
+
+
+// export const updateLikes = (id) => {
+//     const foundMovie = movies.find(movie => movie.id ===id)
+//     const foundIndex = movies.indexOf(foundMovie)
+
+//     fetch(`http://localhost:3010/api/v1/movies/${id}`, {
+//       method: 'PATCH',
+//       headers: {
+//         "Content-type": "application/json"
+//       },
+//       body:JSON.stringify({likes: foundMovie.likes += 1})
+//     })
+//     .then( response => response.json())
+//     .then(response =>{
+//         if(response.error){
+//             alert(response.error)
+//         }else{
+//             dispatch(setMovies (response))
+//         }
+//     })
+//     .catch(console.log)
 // }

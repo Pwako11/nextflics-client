@@ -22,11 +22,10 @@ export const clearWishlist = () => {
     }
 }
 
-
 // async actions
 export const getWishlist = () =>{
     return dispatch =>{
-        return fetch("http://localhost:3000/api/v1/wishlists", {
+        return fetch("http://localhost:3010/api/v1/wishlists", {
             credentials: "include",
             method: "GET",
             headers:{
@@ -59,7 +58,7 @@ export const createWishlist = (wishlistData, credentials, history) => {
             }
         }
         
-        return fetch("http://localhost:3000/api/v1/wishlists", {
+        return fetch("http://localhost:3010/api/v1/wishlists", {
             credentials: "include",
             method: "POST",
             headers:{

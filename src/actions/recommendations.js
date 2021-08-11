@@ -25,7 +25,7 @@ export const clearRecommendation = () => {
 // async actions
 export const getRecommendations = () =>{
     return dispatch =>{
-        return fetch("http://localhost:3000/api/v1/recommendations", {
+        return fetch("http://localhost:3010/api/v1/recommendations", {
             credentials: "include",
             method: "GET",
             headers:{
@@ -59,7 +59,7 @@ console.log("RecommenationData ", recommendationData)
         }
         console.log("in create Recommendation post", setDataTransfer)
 
-        return fetch("http://localhost:3000/api/v1/recommendations", {
+        return fetch("http://localhost:3010/api/v1/recommendations", {
             credentials: "include",
             method: "POST",
             headers:{

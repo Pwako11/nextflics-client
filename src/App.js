@@ -7,21 +7,21 @@ import {getCurrentUser} from "./actions/currentUser.js"
 import {getMovies} from "./actions/movies.js"
 import Home from "./components/Home.js"
 import NavBar from "./components/NavBar.js"
-import Signup from "./components/Signup.js"
-import Login from "./components/Login.js"
-import Logout from "./components/Logout.js"
-import Reviews from "./components/Review.js"
-import ReviewCard from "./components/ReviewCard.js"
-import ReviewForm from "./components/ReviewForm.js"
-import ReviewNewFormWrapper from "./components/ReviewNewFormWrapper.js"
-import ReviewEditFormWrapper from "./components/ReviewEditFormWrapper.js"
-import Recommendations from "./components/Recommendation.js"
-import RecommendationCard from "./components/RecommendationCard.js"
-import NewRecommendationForm from "./components/NewRecommendationForm.js"
-import Wishlist from "./components/Wishlist.js"
-import NewWishlistForm from "./components/NewWishlistForm.js"
-import WishlistCard from "./components/WishlistCard.js"
-import MovieShowcase from "./components/MovieShowcase.js" 
+import Signup from "./components/users/Signup.js"
+import Login from "./components/users/Login.js"
+import Logout from "./components/users/Logout.js"
+import Reviews from "./components/reviews/Review.js"
+import ReviewCard from "./components/reviews/ReviewCard.js"
+import ReviewForm from "./components/reviews/ReviewForm.js"
+import ReviewNewFormWrapper from "./components/reviews/ReviewNewFormWrapper.js"
+import ReviewEditFormWrapper from "./components/reviews/ReviewEditFormWrapper.js"
+import Recommendations from "./components/recommendations/Recommendation.js"
+import RecommendationCard from "./components/recommendations/RecommendationCard.js"
+import NewRecommendationForm from "./components/recommendations/NewRecommendationForm.js"
+import Wishlist from "./components/wishlists/Wishlist.js"
+import NewWishlistForm from "./components/wishlists/NewWishlistForm.js"
+import WishlistCard from "./components/wishlists/WishlistCard.js"
+import MovieShowcase from "./components/movies/MovieShowcase.js" 
 import MainContainer from "./components/MainContainer.js"
 import {preSetFormDataForEdit} from "./actions/reviewForm.js"
 
@@ -62,7 +62,7 @@ class App extends React.Component{
           <Route exact path='/reviews' component={Reviews} />
           <Route exact path='/reviews/new' component={ReviewNewFormWrapper }/>
           <Route exact path='/reviews/:id' render={props =>{
-            const review =  reviews.find(review => review.id === props.match.params.id)
+            const review =  reviews.find(review => review.id === props.match.params.id)            
             return<ReviewCard review={review}{...props}/>
             }
           }/>
@@ -70,7 +70,7 @@ class App extends React.Component{
             const review =  reviews.find(review => review.id === props.match.params.id)
             
             console.log("edit path review", review)
-            // preSetFormDataForEdit(review)
+            review && preSetFormDataForEdit(review)
             return<ReviewEditFormWrapper review={review}{...props}/>
             }
           }/>
@@ -98,7 +98,6 @@ class App extends React.Component{
 }
 
 const mapStateToProps = state => {
-  console.log("State in App", state)
   return {
     currentUser: state.currentUser,
     loggedIn: !!state.currentUser,

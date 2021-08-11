@@ -3,10 +3,10 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {NavLink} from 'react-router-dom'
 // import Login from "./Login.js"
-import Logout from "./Logout.js"
+import Logout from "./users/Logout.js"
 // import Signup from "./Signup.js"
 
-const NavBar = ({currentUser, loggedIn}) => {
+const NavBar = ({loggedIn}) => {
 
   return (
     <div className= "nav">
