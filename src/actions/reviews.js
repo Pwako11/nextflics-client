@@ -20,7 +20,6 @@ export const clearReview = () => {
     }
 }
 
-
 export const updateReviewSuccess = review => {
     return{
         type: "UPDATE_REVIEW",
@@ -86,8 +85,9 @@ export const createReview = (reviewData, userId, movieID) => {
     }
 }
 
-export const updateReview = (reviewData, credentials, history) => {
-    console.log("in  review create- history", history)
+export const updateReview = (reviewData, credentials, review) => {
+    console.log("in updateReview value for reviewData", reviewData)
+    console.log("in updateReview value for review", review)
       return dispatch => {
           const userInfo = {
               user: credentials 
@@ -115,7 +115,7 @@ export const updateReview = (reviewData, credentials, history) => {
               if(response.error){
                   alert(response.error)
               }else{
-                  dispatch(updateReview(response))
+                  dispatch(updateReviewSuccess(response))
                   dispatch(setReview(response))
                   dispatch(resetReviewForm ())
                   // history.push(`/reviews/${response.data.id}`)

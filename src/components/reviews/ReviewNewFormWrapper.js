@@ -10,8 +10,8 @@ const ReviewNewFormWrapper = ({ history, location, createReview }) => {
 
     const handleSubmit = (event, formData, userId, history) => {
         event.preventDefault()
-        console.log("Form data:", formData)
-        console.log("userid:", userId)
+        // console.log("Form data:", formData)
+        // console.log("userid:", userId)
         createReview(formData, userId, movieID, history )
         .then((id)=> {
 
@@ -21,7 +21,6 @@ const ReviewNewFormWrapper = ({ history, location, createReview }) => {
     }
     return (
         <>
-            <p>{movieID}</p>
             < ReviewForm history={history} handleSubmit={handleSubmit} />
 
         </>

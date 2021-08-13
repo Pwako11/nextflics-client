@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 
 const ReviewCard = ({review, movies}) =>{
    
-    console.log( "Review Card props value for movies ", review)
+    console.log( "Review Card props value for reviews ", review)
     const movieID = review.relationships.movie.data.id;
     const reviewedMovie = movies.find(element => element.id == movieID);
    

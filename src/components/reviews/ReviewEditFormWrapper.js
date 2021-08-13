@@ -5,7 +5,7 @@ import {preSetFormDataForEdit, resetReviewForm} from "../../actions/reviewForm.j
 import ReviewForm from './ReviewForm'
 
 class ReviewEditFormWrapper extends React.Component{
-
+    
      componentDidMount(){
         this.props.review && this.props.preSetFormDataForEdit(this.props.review)
     }
@@ -14,25 +14,23 @@ class ReviewEditFormWrapper extends React.Component{
          this.props.review && !prevProps.review && this.props.preSetFormDataForEdit(this.props.review)
      }
 
-    // componentWillUnmount() {
-    //     this.props.resetReviewForm()
-    // }
+    componentWillUnmount() {
+        // this.props.resetReviewForm()
+    }
 
-    handleSubmit = (event, formData, userId )=>{
-        const {updateReview, review, history} = this.props
+    handleSubmit = (event, formData, userId, history )=>{
         event.preventDefault()
-        console.log("In handle Submit event is", event)
-        updateReview({formData, userId
-        },
-        history
-        )
+        console.log( "review edit handle submit", this.props)
+        const {updateReview, review } = this.props
         
+        console.log("In handle Submit event is", event)
+        updateReview(formData, userId, review)
     } 
     
     render() {
         const {history, handleSubmit} = this.props
-        return < ReviewForm history={history} handleSubmit={handleSubmit} />
+        return <ReviewForm editMode history={history}  handleSubmit={handleSubmit} />
     }
 };
 
-export default connect(null, {updateReview}, preSetFormDataForEdit, resetReviewForm)(ReviewEditFormWrapper);
+export default connect(null, {updateReview, preSetFormDataForEdit, resetReviewForm})(ReviewEditFormWrapper);

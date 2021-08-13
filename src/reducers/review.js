@@ -7,7 +7,7 @@ export default (state = [], action) =>{
         case "CLEAR_REVIEW":
             return []
         case "UPDATE_REVIEW":
-            console.log("in UPDATE TRIP Action is ", action)
+            console.log("in update Review Action is ", action)
             return state
         default:
             return state 

@@ -4,9 +4,9 @@ import {updateReviewForm} from "../../actions/reviewForm.js";
 
 // import {Link} from 'react-router-dom'
 
-const ReviewForm = ({formData, history, updateReviewForm, createReview, userId, handleSubmit}) => {
-    console.log( "here is the user ID prop from state", formData)
-    const {content, rate, user_id, movie_id} = FormData
+const ReviewForm = ({formData, history, updateReviewForm, userId, handleSubmit, editMode}) => {
+    console.log( "here is the review prop from state", )
+    const {content, rate, user_id, movie_id} = formData
 
     const handleChange=(event)=>{
         console.log("trigger reviewform handle change")
@@ -16,7 +16,7 @@ const ReviewForm = ({formData, history, updateReviewForm, createReview, userId, 
 
     return(
     <form  onSubmit={event =>{
-        console.log("In on Submit")
+        console.log("In review form Submit")
         handleSubmit(event, formData, userId, history)
     } } >
         <input
@@ -49,14 +49,14 @@ const ReviewForm = ({formData, history, updateReviewForm, createReview, userId, 
         />
         <br/>
         
-        <input type="submit" value="Post your Review" />
+        <input type="submit" value={editMode ? "update review" : "Post your review"}/>
     </form> 
     )
 };
 
 const mapStateToProps = state => {
 
-    console.log("Review Form", state)
+    // console.log("Review Form state", state)
     const userId = state.currentUser ? state.currentUser.data.id : ""
     return {
         formData: state.reviewForm,
