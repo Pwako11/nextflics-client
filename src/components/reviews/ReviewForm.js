@@ -4,8 +4,8 @@ import {updateReviewForm} from "../../actions/reviewForm.js";
 
 // import {Link} from 'react-router-dom'
 
-const ReviewForm = ({formData, history, updateReviewForm, userId, handleSubmit, editMode}) => {
-    console.log( "here is the review prop from state", )
+const ReviewForm = ({formData, updateReviewForm, userId, handleSubmit, editMode}) => {
+    console.log( "here is the review prop from state", formData)
     const {content, rate, user_id, movie_id} = formData
 
     const handleChange=(event)=>{
@@ -16,8 +16,9 @@ const ReviewForm = ({formData, history, updateReviewForm, userId, handleSubmit, 
 
     return(
     <form  onSubmit={event =>{
+        event.preventDefault()
         console.log("In review form Submit")
-        handleSubmit(event, formData, userId, history)
+        handleSubmit(formData, userId)
     } } >
         <input
             placeholder= "Type your review here "

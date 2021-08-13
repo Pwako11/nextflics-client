@@ -68,8 +68,6 @@ class App extends React.Component{
           }/>
            <Route exact path='/reviews/:id/edit' render={props =>{
             const review =  reviews.find(review => review.id === props.match.params.id)
-            
-            console.log("edit path review", review)
            
             review && preSetFormDataForEdit(review)
 

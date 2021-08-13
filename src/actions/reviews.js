@@ -27,6 +27,14 @@ export const updateReviewSuccess = review => {
     }
 }
 
+
+export const deleteReview = review => {
+    return{
+        type: "DELETE_REVIEW",
+        review
+    }
+}
+
 // async actions
 export const getReviews = () =>{
     return dispatch =>{
@@ -85,7 +93,7 @@ export const createReview = (reviewData, userId, movieID) => {
     }
 }
 
-export const updateReview = (reviewData, credentials, review) => {
+export const updateReview = (reviewData, credentials, review, history) => {
     console.log("in updateReview value for reviewData", reviewData)
     console.log("in updateReview value for review", review)
       return dispatch => {
@@ -101,7 +109,7 @@ export const updateReview = (reviewData, credentials, review) => {
               }
           }
           
-          return fetch(`http://localhost:3010/api/v1/reviews/${reviewData.id}`, {
+          return fetch(`http://localhost:3010/api/v1/reviews/${review.id}`, {
               credentials: "include",
               method: "PATCH",
               headers:{
@@ -111,14 +119,13 @@ export const updateReview = (reviewData, credentials, review) => {
           })
           .then( response => response.json())
           .then(response =>{
-              console.log( "this the fetch return for review create", response)
+              console.log( "this the fetch return for review create", response.data.attributes.rate )
               if(response.error){
                   alert(response.error)
               }else{
-                  dispatch(updateReviewSuccess(response))
-                  dispatch(setReview(response))
-                  dispatch(resetReviewForm ())
-                  // history.push(`/reviews/${response.data.id}`)
+                    dispatch(updateReviewSuccess(response))
+                    // history.push(`/reviews/${response.data.id}`) 
+                     return response.data.id
               }
           })
           .catch(console.log)

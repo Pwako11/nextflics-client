@@ -15,21 +15,23 @@ class ReviewEditFormWrapper extends React.Component{
      }
 
     componentWillUnmount() {
-        // this.props.resetReviewForm()
+        this.props.resetReviewForm()
     }
 
-    handleSubmit = (event, formData, userId, history )=>{
-        event.preventDefault()
-        console.log( "review edit handle submit", this.props)
-        const {updateReview, review } = this.props
+    handleSubmit = (formData, userId)=>{
+        console.log( "review edit handle submit")
         
-        console.log("In handle Submit event is", event)
-        updateReview(formData, userId, review)
+        const {updateReview, review, history } = this.props
+        updateReview(formData, userId, review, history)
+        .then((id)=> {
+            console.log( "retrun of patch value is =", id)
+            history.push(`/reviews/${id}`) 
+        })
     } 
     
     render() {
         const {history, handleSubmit} = this.props
-        return <ReviewForm editMode history={history}  handleSubmit={handleSubmit} />
+        return <ReviewForm editMode  handleSubmit={this.handleSubmit} />
     }
 };
 

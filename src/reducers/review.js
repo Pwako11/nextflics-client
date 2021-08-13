@@ -7,7 +7,9 @@ export default (state = [], action) =>{
         case "CLEAR_REVIEW":
             return []
         case "UPDATE_REVIEW":
-            console.log("in update Review Action is ", action)
+            console.log("in update Review Action is ", action.review)
+            return state.map(review => review.id === action.review.id? action.review : review)
+        case "DELETE_REVIEW":
             return state
         default:
             return state 
