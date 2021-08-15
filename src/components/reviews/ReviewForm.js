@@ -35,6 +35,7 @@ const ReviewForm = ({formData, updateReviewForm, userId, handleSubmit, editMode}
         />
         <br/>
         <input
+            type="hidden"
             placeholder = "User ID "
             name="user_id"
             onChange={handleChange}
@@ -43,6 +44,7 @@ const ReviewForm = ({formData, updateReviewForm, userId, handleSubmit, editMode}
         <br/>
 
         <input
+            type="hidden"
             placeholder= "Movie ID"
             name="movie_id"
             onChange={handleChange}

@@ -27,8 +27,7 @@ export const updateReviewSuccess = review => {
     }
 }
 
-
-export const deleteReview = review => {
+export const deleteReviewSuccess = review => {
     return{
         type: "DELETE_REVIEW",
         review
@@ -58,7 +57,7 @@ export const getReviews = () =>{
 }
 
 export const createReview = (reviewData, userId, movieID) => {
-  console.log("in  review create- userId", userId)
+  console.log("in  review create- reviewData",)
     return dispatch => { 
         const setDataTransfer ={
             review: {
@@ -94,8 +93,7 @@ export const createReview = (reviewData, userId, movieID) => {
 }
 
 export const updateReview = (reviewData, credentials, review, history) => {
-    console.log("in updateReview value for reviewData", reviewData)
-    console.log("in updateReview value for review", review)
+    const reviewId = review.id
       return dispatch => {
           const userInfo = {
               user: credentials 
@@ -109,7 +107,7 @@ export const updateReview = (reviewData, credentials, review, history) => {
               }
           }
           
-          return fetch(`http://localhost:3010/api/v1/reviews/${review.id}`, {
+          return fetch(`http://localhost:3010/api/v1/reviews/${reviewId}`, {
               credentials: "include",
               method: "PATCH",
               headers:{
@@ -119,15 +117,40 @@ export const updateReview = (reviewData, credentials, review, history) => {
           })
           .then( response => response.json())
           .then(response =>{
-              console.log( "this the fetch return for review create", response.data.attributes.rate )
+              console.log( "this the fetch return for review create", response.data )
               if(response.error){
                   alert(response.error)
               }else{
                     dispatch(updateReviewSuccess(response))
-                    // history.push(`/reviews/${response.data.id}`) 
-                     return response.data.id
+                     return reviewId
               }
           })
           .catch(console.log)
       }
   }
+
+export const deleteReview = (review, history) => {
+const reviewId = review.id 
+    return dispatch => {
+                
+    return fetch(`http://localhost:3010/api/v1/reviews/${reviewId}`, {
+        credentials: "include",
+        method: "DELETE",
+        headers:{
+            "Content-Type": "application/json"
+        }
+    })
+        .then( response => response.json())
+        .then(response =>{
+            console.log( "this the fetch return for review delete", response )
+            if(response.error){
+                alert(response.error)
+            }else{
+                dispatch(deleteReviewSuccess(reviewId))
+                history.push(`/reviews`) 
+                // return response.data.id
+            }
+        })
+        .catch(console.log)
+    }
+}

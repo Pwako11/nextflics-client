@@ -4,8 +4,13 @@ import {updateNewRecommendationForm} from "../../actions/newRecommendationForm.j
 import {createRecommendation} from "../../actions/recommendations.js";
 // import {Link} from 'react-router-dom'
 
-const NewRecommendationForm = ({updateNewRecommendationFormData, history, updateNewRecommendationForm, createRecommendation, userId}) => {
-    console.log( "here is the FormData prop from state", updateNewRecommendationFormData)
+const NewRecommendationForm = ({updateNewRecommendationFormData, history, location, updateNewRecommendationForm, createRecommendation, userId}) => {
+     
+    const movieId = location.state.movieID
+    const movieName = location.state.movieName
+
+    console.log( "here is the location prop from state", location)
+
     const {name, user_id, movie_id} = updateNewRecommendationFormData
 
     const handleChange=(event)=>{
@@ -21,18 +26,20 @@ const NewRecommendationForm = ({updateNewRecommendationFormData, history, update
         event.preventDefault()
         createRecommendation( 
             updateNewRecommendationFormData,
+            movieName,
+            userId,
+            movieId,
             history
-        )
-        
+        ) 
     } 
 
     return(
-    <form  onSubmit={handleSubmit} >
+        <form  onSubmit={handleSubmit} >
         <input
             placeholder= "Movie name"
             name="name"
             onChange={handleChange}
-            value= {name}
+            value= {movieName}
         />
         <br/>
         
@@ -40,7 +47,7 @@ const NewRecommendationForm = ({updateNewRecommendationFormData, history, update
             placeholder = "User ID "
             name="user_id"
             onChange={handleChange}
-            value= {user_id}
+            value= {userId}
         />
         <br/>
 
@@ -48,17 +55,21 @@ const NewRecommendationForm = ({updateNewRecommendationFormData, history, update
             placeholder= "Movie ID"
             name="movie_id"
             onChange={handleChange}
-            value= {movie_id}
+            value= {movieId}
         />
         <br/>
         
         <input type="submit" value="Add to Recommendations" />
-    </form> 
+    </form>
+
     )
 };
 
 const mapStateToProps = state => {
     const userId = state.currentUser ? state.currentUser.data.id : ""
+
+
+    console.log ( "in recommendation state" , state)
     return {
         updateNewRecommendationFormData: state.newRecommendationForm,
         userId

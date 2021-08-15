@@ -60,7 +60,7 @@ class App extends React.Component{
           }/>
 
           <Route exact path='/reviews' component={Reviews} />
-          <Route exact path='/reviews/new' component={ReviewNewFormWrapper }/>
+          <Route exact path='/reviews/new' component={ReviewNewFormWrapper}/>
           <Route exact path='/reviews/:id' render={props =>{
             const review =  reviews.find(review => review.id === props.match.params.id)            
             return<ReviewCard review={review}{...props}/>
@@ -75,7 +75,7 @@ class App extends React.Component{
             }
           }/>
 
-          <Route exact path='/wishlist' component={Wishlist}/>
+          <Route exact path='/wishlists' component={Wishlist}/>
           <Route exact path='/wishlists/new' component={NewWishlistForm}/>
           <Route exact path='/wishlists/:id' render={props =>{
             const card =  wishlists.find(wishlist => wishlist.id === props.match.params.id)

@@ -1,4 +1,3 @@
-import currentUser from "./currentUser"
 
 const initialState = {
     name:"",

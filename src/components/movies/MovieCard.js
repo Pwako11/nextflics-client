@@ -6,26 +6,33 @@ import {withRouter} from 'react-router-dom';
 // import CardBack from './CardBack.js';
 
 const MovieCard = ({card, history, updateLikes}) => {
-    
+
     const parentPointer = history.location.pathname
     const movieID = card.id
-    const wishlistPath = `/wishlists/${movieID}/edit`
-    const reviewPath = `/reviews/${movieID}/edit`
+    const movieName = card.title
+    const wishlistPath = `/wishlists/new`
     const newReviewPath = '/reviews/new'
-    const recommendationPath = `/recommendations/${movieID}/edit`
+    const recommendationPath = `/recommendations/new`
     
     const wishlistRouteChange = () =>{
-        history.push(wishlistPath)
+        history.push(wishlistPath, {
+            movieID: movieID,
+            movieName: movieName
+        })
     }
     
     const reviewRouteChange = () =>{
         history.push(newReviewPath, {
-            movieID: movieID
+            movieID: movieID,
+            movieName: movieName
         })
     }
 
     const recommendationRouteChange = () =>{
-        history.push(recommendationPath)
+        history.push(recommendationPath, {
+            movieID: movieID,
+            movieName: movieName
+        })
     }
 
     return (

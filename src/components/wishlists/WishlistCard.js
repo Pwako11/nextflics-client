@@ -1,15 +1,23 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import {connect} from 'react-redux';
+import {deleteWishlist} from '../../actions/wishlist';
 
-const WishlistCard = ({card}) => {
+
+const WishlistCard = ({movies, card, history, deleteWishlist}) => {
 
     return (
         <div>
-            <p>{card.attributes.name}</p>
-            <Link to={`/wishlists/${card.id}/edit`}>Edit this wishlist</Link>
+            <p>{card.attributes.name} <button onClick={()=>deleteWishlist(card, history)}>Delete this Wishlist</button> </p>
         </div>
 
     )
 }
 
-export default WishlistCard
+const mapStateToProps = (state) => {
+
+    return {
+        movies: state.movies
+    }
+}
+
+export default connect(mapStateToProps, {deleteWishlist}) (WishlistCard)

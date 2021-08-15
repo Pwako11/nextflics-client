@@ -19,9 +19,11 @@ const NewWishlistForm = ({updateNewWishlistFormData, history, updateNewWishlistF
         createWishlist({
             ...updateNewWishlistFormData,
             userId
-        },
-            history
-        )
+        })
+        .then((id)=> {
+            console.log( "retrun of patch wishlist =", id)
+            history.push(`/wishlists/${id}`) 
+        })
     } 
 
     return(

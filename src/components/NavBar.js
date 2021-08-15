@@ -11,7 +11,7 @@ const NavBar = ({loggedIn}) => {
   return (
     <span className= "nav">
       <NavLink exact activeClassName="active" to="/" >Home  |   </NavLink>
-      <NavLink exact activeClassName="active" to="/wishlist" >My Wishlist  |  </NavLink>
+      <NavLink exact activeClassName="active" to="/wishlists" >My Wishlist  |  </NavLink>
       <NavLink exact activeClassName="active" to="/recommendations">Recommendations  |  </NavLink>
       <NavLink exact activeClassName="active" to="/reviews">My Reviews  |  </NavLink>
 

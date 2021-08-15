@@ -44,17 +44,15 @@ export const getRecommendations = () =>{
     }
 }
 
-export const createRecommendation = (recommendationData, credentials, history ) => {
-console.log("RecommenationData ", recommendationData)
+export const createRecommendation = (recommendationData, movieName, userId, movieId, history ) => {
+console.log("Inside createRecommenation - check for RecommendationData ", userId)
     return dispatch => {
-        const userInfo = {
-            user: credentials 
-        } 
+         
         const setDataTransfer ={
              recommendation: {
-                name: recommendationData.name,
-                user_id: recommendationData.user_id, 
-                movie_id: recommendationData.movie_id
+                name: movieName,
+                user_id: userId, 
+                movie_id: movieId
             }
         }
         console.log("in create Recommendation post", setDataTransfer)
@@ -76,7 +74,7 @@ console.log("RecommenationData ", recommendationData)
                 dispatch(addRecommendation(response))
                 dispatch(setRecommendation(response))
                 dispatch(resetNewRecommendationForm())
-                history.push('/recommendations/${response.data.id}')
+                history.push(`/recommendations/${response.data.id}`)
             }
         })
         .catch(console.log)

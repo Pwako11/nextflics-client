@@ -10,7 +10,7 @@ export default (state = [], action) =>{
             console.log("in update Review Action is ", action.review)
             return state.map(review => review.id === action.review.id? action.review : review)
         case "DELETE_REVIEW":
-            return state
+            return state.filter(review => review.id === action.reviewId ? false : true)
         default:
             return state 
     }   

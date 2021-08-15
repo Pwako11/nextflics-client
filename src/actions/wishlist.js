@@ -22,6 +22,14 @@ export const clearWishlist = () => {
     }
 }
 
+export const deleteWishlistSuccess = wishlist => {
+    console.log("in delete WishlistSuccess ", wishlist)
+    return{
+        type: "DELETE_WISHLIST",
+        wishlist
+    }
+}
+
 // async actions
 export const getWishlist = () =>{
     return dispatch =>{
@@ -44,7 +52,7 @@ export const getWishlist = () =>{
     }
 }
 
-export const createWishlist = (wishlistData, credentials, history) => {
+export const createWishlist = (wishlistData, credentials) => {
 
     return dispatch => {
         const userInfo = {
@@ -75,7 +83,37 @@ export const createWishlist = (wishlistData, credentials, history) => {
                 dispatch(addWishlist(response))
                 dispatch(setWishlist(response))
                 dispatch(resetNewWishlistForm())
-                history.push(`/wishlists/${response.data.id}`)
+                return response.data.id
+            }
+        })
+        .catch(console.log)
+    }
+}
+
+export const deleteWishlist = (wishlist, history) => {
+    console.log("inside wishlist delete action - history" , history)
+    const wishlistId = wishlist.id 
+    
+    return dispatch => {
+
+        console.log("inside wishlist delete action - wishlist" , wishlist)
+           console.log(" inside wishlist fetch dispatch ")     
+        return fetch(`http://localhost:3010/api/v1/wishlists/${wishlistId}`, {
+            credentials: "include",
+            method: "DELETE",
+            headers:{
+                "Content-Type": "application/json"
+            }
+        })
+        .then( response => response.json())
+        .then( response =>{
+            console.log( "this the fetch return for wishlist delete", response )
+            if(response.error){
+                alert(response.error)
+            }else{
+                dispatch(deleteWishlistSuccess(wishlistId))
+                history.push(`/wishlists`) 
+                // return response.data.id
             }
         })
         .catch(console.log)
