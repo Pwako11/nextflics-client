@@ -7,11 +7,11 @@ export const setRecommendation = recommendation =>{
         recommendation
     }
 }
-export const addRecommendation = list =>{
-    console.log( "We are adding a recommendation", list)
+export const addRecommendation = recommendation =>{
+    console.log( "We are adding a recommendation", recommendation)
     return{
         type: "ADD_RECOMMENDATION",
-        list
+        recommendation
     }
 }
 
@@ -21,7 +21,13 @@ export const clearRecommendation = () => {
     }
 }
 
-
+export const deleteRecommendationSuccess = recommendation => {
+    console.log("in delete Recommendation ", recommendation)
+    return{
+        type: "DELETE_RECOMMENDATION",
+        recommendation
+    }
+}
 // async actions
 export const getRecommendations = () =>{
     return dispatch =>{
@@ -44,15 +50,16 @@ export const getRecommendations = () =>{
     }
 }
 
-export const createRecommendation = (recommendationData, movieName, userId, movieId, history ) => {
-console.log("Inside createRecommenation - check for RecommendationData ", userId)
+export const createRecommendation = (recommendationData, movieName, userId, movieId, reviewId, history ) => {
+console.log("Inside createRecommenation - check for reviewID ", reviewId)
     return dispatch => {
          
         const setDataTransfer ={
              recommendation: {
                 name: movieName,
                 user_id: userId, 
-                movie_id: movieId
+                movie_id: movieId, 
+                review_id: reviewId
             }
         }
         console.log("in create Recommendation post", setDataTransfer)
@@ -75,6 +82,33 @@ console.log("Inside createRecommenation - check for RecommendationData ", userId
                 dispatch(setRecommendation(response))
                 dispatch(resetNewRecommendationForm())
                 history.push(`/recommendations/${response.data.id}`)
+            }
+        })
+        .catch(console.log)
+    }
+}
+
+export const deleteRecommendation = (recommendation, history) => {
+
+    const recommendationId = recommendation.id 
+    
+    return dispatch => {
+   
+        return fetch(`http://localhost:3010/api/v1/recommendations/${recommendationId}`, {
+            credentials: "include",
+            method: "DELETE",
+            headers:{
+                "Content-Type": "application/json"
+            }
+        })
+        .then( resp => resp.json())
+        .then( response =>{
+            if(response.error){
+                alert(response.error)
+            }else{
+                dispatch(deleteRecommendationSuccess(recommendationId))
+                history.push(`/recommendations`) 
+                // return response.data.id
             }
         })
         .catch(console.log)

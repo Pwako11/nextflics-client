@@ -7,12 +7,11 @@ import {withRouter} from 'react-router-dom';
 
 const MovieCard = ({card, history, updateLikes}) => {
 
-    const parentPointer = history.location.pathname
     const movieID = card.id
     const movieName = card.title
     const wishlistPath = `/wishlists/new`
     const newReviewPath = '/reviews/new'
-    const recommendationPath = `/recommendations/new`
+  
     
     const wishlistRouteChange = () =>{
         history.push(wishlistPath, {
@@ -23,13 +22,6 @@ const MovieCard = ({card, history, updateLikes}) => {
     
     const reviewRouteChange = () =>{
         history.push(newReviewPath, {
-            movieID: movieID,
-            movieName: movieName
-        })
-    }
-
-    const recommendationRouteChange = () =>{
-        history.push(recommendationPath, {
             movieID: movieID,
             movieName: movieName
         })
@@ -53,7 +45,7 @@ const MovieCard = ({card, history, updateLikes}) => {
             
             <button className="movie_selector_button" onClick={wishlistRouteChange}>Add to Wishlist </button>
             <button className="movie_selector_button" onClick={reviewRouteChange}>Write a Review </button> 
-            <button className="movie_selector_button" onClick={recommendationRouteChange}>Add to Recommended </button>
+           
            
         </div>
 

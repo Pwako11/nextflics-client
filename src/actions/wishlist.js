@@ -52,20 +52,21 @@ export const getWishlist = () =>{
     }
 }
 
-export const createWishlist = (wishlistData, credentials) => {
+export const createWishlist = (wishlistData) => {
 
+
+    console.log( "whislistData", wishlistData)
     return dispatch => {
-        const userInfo = {
-            user: credentials 
-        } 
+
         const setDataTransfer ={
             wishlist: {
-                name: wishlistData.name,
+                name: wishlistData.location.state.movieName,
                 user_id: wishlistData.userId, 
-                movie_id: wishlistData.movie_id
+                movie_id: wishlistData.location.state.movieID
             }
         }
         
+        console.log( "SetDataTransfer", setDataTransfer)
         return fetch("http://localhost:3010/api/v1/wishlists", {
             credentials: "include",
             method: "POST",
@@ -91,13 +92,11 @@ export const createWishlist = (wishlistData, credentials) => {
 }
 
 export const deleteWishlist = (wishlist, history) => {
-    console.log("inside wishlist delete action - history" , history)
+
     const wishlistId = wishlist.id 
     
     return dispatch => {
-
-        console.log("inside wishlist delete action - wishlist" , wishlist)
-           console.log(" inside wishlist fetch dispatch ")     
+   
         return fetch(`http://localhost:3010/api/v1/wishlists/${wishlistId}`, {
             credentials: "include",
             method: "DELETE",
@@ -105,9 +104,8 @@ export const deleteWishlist = (wishlist, history) => {
                 "Content-Type": "application/json"
             }
         })
-        .then( response => response.json())
+        .then( resp => resp.json())
         .then( response =>{
-            console.log( "this the fetch return for wishlist delete", response )
             if(response.error){
                 alert(response.error)
             }else{

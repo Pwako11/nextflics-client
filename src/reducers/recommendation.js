@@ -6,6 +6,8 @@ export default (state = [], action) =>{
                 return state.concat(action.recommendation)
         case "CLEAR_RECOMMENDATION":
             return []
+        case "DELETE_RECOMMENDATION":
+            return state.filter(recommendation => recommendation.id === action.recommendationId ? false : true)
         default:
             return state 
     }   

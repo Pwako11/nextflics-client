@@ -1,18 +1,29 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
+import {connect} from 'react-redux';
+import {deleteRecommendation} from '../../actions/recommendations';
 
-const RecommendationCard = ({card}) =>{
 
-    const movieID = card.relationships.movie.data.id
+const RecommendationCard = ({movies, recommendation, history, deleteRecommendation}) =>{
+
+    console.log( "in recommendationCard", movies)
+
+    const movieID = recommendation.relationships.movie.data.id
+    const movieName = recommendation.attributes.name 
+        
    
     return(
         <div className={movieID}>
 
-            <p>{card.attributes.name}</p>
-            <Link to={`/wishlist/${card.id}/edit`}>Edit this recommomendation</Link>
+            <p>{movieName} <button onClick={()=>deleteRecommendation(recommendation, history)}>Delete this Recommendation</button> </p>
            
         </div>
     ) 
 }
+const mapStateToProps = (state) => {
 
-export default RecommendationCard
+    return {
+        movies: state.movies
+    }
+}
+
+export default connect(mapStateToProps, {deleteRecommendation}) (RecommendationCard)

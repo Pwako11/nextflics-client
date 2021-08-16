@@ -8,10 +8,11 @@ const NewRecommendationForm = ({updateNewRecommendationFormData, history, locati
      
     const movieId = location.state.movieID
     const movieName = location.state.movieName
+    const reviewId = location.state.reviewID
 
     console.log( "here is the location prop from state", location)
 
-    const {name, user_id, movie_id} = updateNewRecommendationFormData
+    const {name, user_id, movie_id, review_id} = updateNewRecommendationFormData
 
     const handleChange=(event)=>{
         console.log("trigger recommendationform handle change")
@@ -29,6 +30,7 @@ const NewRecommendationForm = ({updateNewRecommendationFormData, history, locati
             movieName,
             userId,
             movieId,
+            reviewId,
             history
         ) 
     } 
@@ -56,6 +58,13 @@ const NewRecommendationForm = ({updateNewRecommendationFormData, history, locati
             name="movie_id"
             onChange={handleChange}
             value= {movieId}
+        />
+        <br/>
+        <input
+            placeholder= "Review ID"
+            name="review_id"
+            onChange={handleChange}
+            value= {reviewId}
         />
         <br/>
         

@@ -2,13 +2,15 @@ import React from 'react' ;
 import {connect} from 'react-redux';
 import {updateNewWishlistForm} from "../../actions/newWishlistForm.js";
 import {createWishlist} from "../../actions/wishlist.js";
-// import {Link} from 'react-router-dom'
 
-const NewWishlistForm = ({updateNewWishlistFormData, history, updateNewWishlistForm, createWishlist, userId}) => {
-   
+const NewWishlistForm = ({updateNewWishlistFormData, history, location, updateNewWishlistForm, createWishlist, userId}) => {
+      
+    const movieId = location.state.movieID
+    const movieName = location.state.movieName
+
     const {name, user_id, movie_id} = updateNewWishlistFormData
 
-    const handleChange=(event)=>{
+     const handleChange=(event)=>{
         console.log("trigger wishlistform handle change")
         const {name, value} = event.target
         updateNewWishlistForm(name, value)
@@ -17,11 +19,12 @@ const NewWishlistForm = ({updateNewWishlistFormData, history, updateNewWishlistF
     const handleSubmit = event =>{
         event.preventDefault()
         createWishlist({
-            ...updateNewWishlistFormData,
-            userId
+            updateNewWishlistFormData,
+            userId, 
+            location
         })
         .then((id)=> {
-            console.log( "retrun of patch wishlist =", id)
+    
             history.push(`/wishlists/${id}`) 
         })
     } 
@@ -32,7 +35,7 @@ const NewWishlistForm = ({updateNewWishlistFormData, history, updateNewWishlistF
             placeholder= "Movie name"
             name="name"
             onChange={handleChange}
-            value= {name}
+            value= {movieName}
         />
         <br/>
         
@@ -40,7 +43,7 @@ const NewWishlistForm = ({updateNewWishlistFormData, history, updateNewWishlistF
             placeholder = "User ID "
             name="user_id"
             onChange={handleChange}
-            value= {user_id}
+            value= {userId}
         />
         <br/>
 
@@ -48,7 +51,7 @@ const NewWishlistForm = ({updateNewWishlistFormData, history, updateNewWishlistF
             placeholder= "Movie ID"
             name="movie_id"
             onChange={handleChange}
-            value= {movie_id}
+            value= {movieId}
         />
         <br/>
         
