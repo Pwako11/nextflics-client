@@ -1,4 +1,7 @@
 import {resetReviewForm } from "./reviewForm.js";
+// import {updateReviewForm } from "./reviewForm.js";
+
+// sync actions
 
 export const setReview = review =>{
     return {
@@ -7,7 +10,6 @@ export const setReview = review =>{
     }
 }
 export const addReview = list =>{
-    console.log( "We are adding a review", list)
     return{
         type: "ADD_REVIEW",
         list
@@ -56,8 +58,10 @@ export const getReviews = () =>{
     }
 }
 
-export const createReview = (reviewData, userId, movieID) => {
-  console.log("in  review create- reviewData",)
+export const createReview = (reviewData, reviews, userId, movieID) => {
+
+    let data; 
+  
     return dispatch => { 
         const setDataTransfer ={
             review: {
@@ -78,26 +82,33 @@ export const createReview = (reviewData, userId, movieID) => {
         })
         .then( response => response.json())
         .then(response =>{
-            console.log( "this the fetch return for review create", response)
             if(response.error){
                 alert(response.error)
             }else{
-                dispatch(addReview(response))
-                dispatch(setReview(response))
-                dispatch(resetReviewForm ())
-                return response.data.id
+                data = response.data 
             }
+            return dispatch(addReview(response))
+        }).then(()=>{
+            dispatch(setReview([...reviews, data]))
+        }).then(()=>{
+            dispatch(resetReviewForm ())
+        }).then(()=> {
+            return data.id
         })
         .catch(console.log)
     }
 }
 
-export const updateReview = (reviewData, credentials, review, history) => {
+export const updateReview = (reviewData, reviews, review, history) => {
+
+    // console.log("reviewData", reviewData)
+    // console.log("credentials", reviews)
+    // console.log("review", review)
+    // console.log("history", history)
+
+    let updatedReview;
     const reviewId = review.id
       return dispatch => {
-          const userInfo = {
-              user: credentials 
-          } 
           const setDataTransfer ={
               review: {
                   content: reviewData.content,
@@ -117,39 +128,51 @@ export const updateReview = (reviewData, credentials, review, history) => {
           })
           .then( response => response.json())
           .then(response =>{
+            updatedReview = response.data
               console.log( "this the fetch return for review create", response.data )
               if(response.error){
                   alert(response.error)
               }else{
-                    dispatch(updateReviewSuccess(response))
-                     return reviewId
+                    dispatch(updateReviewSuccess(updatedReview))
+                    return reviewId
               }
           })
           .catch(console.log)
       }
   }
 
-export const deleteReview = (review, history) => {
-const reviewId = review.id 
+export const deleteReview = (reviews, review, history) => {
+    console.log("delete review step #1")
+    let updatedReviews; 
+
+    const reviewId = review.id 
+    console.log( "reviewId", reviewId)
+
     return dispatch => {
-                
-    return fetch(`http://localhost:3010/api/v1/reviews/${reviewId}`, {
-        credentials: "include",
-        method: "DELETE",
-        headers:{
-            "Content-Type": "application/json"
-        }
-    })
-        .then( response => response.json())
+        console.log("delete review step #2")
+        return fetch(`http://localhost:3010/api/v1/reviews/${reviewId}`, {
+            credentials: "include",
+            method: "DELETE",
+            headers:{
+                "Content-Type": "application/json"
+            }
+        })
+        .then( resp => resp.json())
         .then(response =>{
-            console.log( "this the fetch return for review delete", response )
+            console.log("delete review step #3")
+            console.log( "In delete review response", response )
             if(response.error){
                 alert(response.error)
             }else{
-                dispatch(deleteReviewSuccess(reviewId))
-                history.push(`/reviews`) 
-                // return response.data.id
+                updatedReviews = reviews.filter(review => review.id === reviewId ? false : true) 
+                history.push(`/reviews`)
             }
+        }).then(() =>{
+            console.log("delete review step #4")
+            return dispatch(deleteReviewSuccess(reviewId)) 
+        }).then(()=>{
+            console.log("delete review step #5")
+            return dispatch(setReview(updatedReviews))
         })
         .catch(console.log)
     }

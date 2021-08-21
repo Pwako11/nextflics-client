@@ -12,7 +12,6 @@ import Login from "./components/users/Login.js"
 import Logout from "./components/users/Logout.js"
 import Reviews from "./components/reviews/Review.js"
 import ReviewCard from "./components/reviews/ReviewCard.js"
-import ReviewForm from "./components/reviews/ReviewForm.js"
 import ReviewNewFormWrapper from "./components/reviews/ReviewNewFormWrapper.js"
 import ReviewEditFormWrapper from "./components/reviews/ReviewEditFormWrapper.js"
 import Recommendations from "./components/recommendations/Recommendation.js"
@@ -34,7 +33,6 @@ class App extends React.Component{
 
   render(){
     const {loggedIn, currentUser, wishlists, movie, recommendations, reviews, preSetFormDataForEdit} =this.props
- 
     return (     
       <div className= "App">
         <p>{ currentUser ? `Welcome  ${currentUser.data.attributes.name}` : "" }</p>  
@@ -42,9 +40,9 @@ class App extends React.Component{
         
         <Switch>
           <Route exact path='/' render={() => loggedIn ? <MainContainer /> : <Home />} />
-          <Route exact path='/signup' component={Signup}/>
-          <Route exact path='/login' component={Login}/> 
-          <Route exact path='/logout' component={Logout}/>
+          <Route path='/signup' component={Signup}/>
+          <Route path='/login' component={Login}/> 
+          <Route path='/logout' component={Logout}/>
           <Route exact path='/recommendations' component={Recommendations}/>
           <Route exact path='/recommendations/new' component={NewRecommendationForm}/>
           <Route exact path='/recommendations/:id' render={props =>{

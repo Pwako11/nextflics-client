@@ -3,15 +3,15 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {deleteReview} from '../../actions/reviews';
 
-const ReviewCard = ({review, movies, history, deleteReview}) =>{
-  
-    const movieID = review.relationships.movie.data.id;
-    const reviewedMovie = movies.find(element => element.id == movieID);
-    const reviewID = review.id
+const ReviewCard = (props) =>{
+ 
+    const movieID = props.review.relationships.movie.data.id;
+    const reviewedMovie = props.movies.find(element => element.id == movieID);
+    const reviewID = props.review.id
     const recommendationPath = `/recommendations/new`
 
     const recommendationRouteChange = () =>{
-        history.push(recommendationPath, {
+        props.history.push(recommendationPath, {
             movieID: movieID,
             movieName: reviewedMovie.title,
             reviewID: reviewID
@@ -20,15 +20,18 @@ const ReviewCard = ({review, movies, history, deleteReview}) =>{
    
     return (
         <div  >
-            <p>{`Review for ${reviewedMovie.title}:  `}{review.attributes.content }</p> 
+            <p>{`Review for ${reviewedMovie.title}:  `}{props.review.attributes.content }</p> 
 
-            <p>Rating: {review.attributes.rate }</p>
+            <p>Rating: {props.review.attributes.rate }</p>
 
-            <Link to={`/reviews/${review.id}/edit`}>Edit this review</Link>
+            <Link to={`/reviews/${props.review.id}/edit`}>Edit this review</Link>
             <br/>
-            <p> Would you like to recomment this movie to other? <button className="review_selector_button" onClick={recommendationRouteChange}>Add to Recommendations </button></p>
+            <p> Would you like to recommend this movie to other? <button className="review_selector_button" onClick={recommendationRouteChange}>Add to Recommendations </button></p>
             
-            <button onClick={()=>deleteReview(review, history)}>Delete this review</button>
+            <button onClick={()=>deleteReview(props.reviews, props.review, props.history)()}>Delete this review</button>
+            <>
+                <button onClick={() => props.history.goBack()}>Back</button>
+            </>
            
         </div>
     )
@@ -37,7 +40,8 @@ const ReviewCard = ({review, movies, history, deleteReview}) =>{
 const mapStateToProps = (state) => {
 
         return {
-        movies: state.movies
+        movies: state.movies,
+        reviews: state.review
     }
 }
 

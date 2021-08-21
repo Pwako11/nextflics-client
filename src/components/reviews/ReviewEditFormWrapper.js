@@ -7,7 +7,6 @@ import ReviewForm from './ReviewForm'
 class ReviewEditFormWrapper extends React.Component{
        
      componentDidMount(){
-        console.log("in componentsDidMount - props are", this.props)
         this.props.review && this.props.preSetFormDataForEdit(this.props.review)
     }
 

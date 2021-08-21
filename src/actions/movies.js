@@ -26,6 +26,13 @@ export const getMovies = () => {
     }
 }
 
+export const updateMovieSuccess = movie => {
+    return{
+        type: "UPDATE_MOVIE",
+        movie
+    }
+}
+
 // export const UpdateMovieRating = () => {
 //     return dispatch => {
 //         return fetch("http://localhost:3010/api/v1/movies", {
@@ -48,25 +55,35 @@ export const getMovies = () => {
 //     }
 // }
 
+export const updateLikes = (movie, movies) => {
+    console.log("In updateLikes - movie", movie)
+    console.log("Step 1")
+    let updatedMovie;
+    const movieId = movie.id
 
-// export const updateLikes = (id) => {
-//     const foundMovie = movies.find(movie => movie.id ===id)
-//     const foundIndex = movies.indexOf(foundMovie)
+    return dispatch =>{
+        console.log("step 2")
 
-//     fetch(`http://localhost:3010/api/v1/movies/${id}`, {
-//       method: 'PATCH',
-//       headers: {
-//         "Content-type": "application/json"
-//       },
-//       body:JSON.stringify({likes: foundMovie.likes += 1})
-//     })
-//     .then( response => response.json())
-//     .then(response =>{
-//         if(response.error){
-//             alert(response.error)
-//         }else{
-//             dispatch(setMovies (response))
-//         }
-//     })
-//     .catch(console.log)
-// }
+        fetch(`http://localhost:3010/api/v1/movies/${movieId}`, {
+            credentials: "include",
+            method: 'PATCH',
+            headers: {
+                "Content-type": "application/json"
+            },
+            body:JSON.stringify({likes: movie.likes += 1})
+            })
+            .then( resp => resp.json())
+            .then(response =>{
+                console.log("step 3")
+                console.log("in movie fetch reponse", response)
+                updatedMovie = response.data
+            if(response.error){
+               alert(response.error)
+            }else{
+               dispatch(updateMovieSuccess(updatedMovie))
+               dispatch(setMovies (movies))
+            }
+        })
+    .catch(console.log)
+    }
+}

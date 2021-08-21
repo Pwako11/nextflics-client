@@ -2,10 +2,15 @@ import React, { Component } from 'react';
 // import NewWishlistForm from './NewWishlistForm.js';
 import {connect} from "react-redux"
 import {withRouter} from 'react-router-dom';
+import {updateLikes} from '../../actions/movies';
 // import CardFront from './CardFront.js';
 // import CardBack from './CardBack.js';
 
-const MovieCard = ({card, history, updateLikes}) => {
+const MovieCard = ({movies, card, history, updateLikes}) => {
+
+    console.log("In movieCard - card", card)
+    console.log("In movieCard - history", history)
+    console.log("In movieCard - updateLikes", updateLikes)
 
     const movieID = card.id
     const movieName = card.title
@@ -41,7 +46,7 @@ const MovieCard = ({card, history, updateLikes}) => {
             <p>overview:{card.overview}</p>
             <p>{card.likes} Likes </p>
             
-            <button className="movie_like_btn" onClick={() =>card.updateLikes(card.id)}>Like {'<3'}</button>
+            <button className="movie_like_btn" onClick={() =>updateLikes(card, movies)}>Like {'<3'}</button>
             
             <button className="movie_selector_button" onClick={wishlistRouteChange}>Add to Wishlist </button>
             <button className="movie_selector_button" onClick={reviewRouteChange}>Write a Review </button> 
@@ -52,10 +57,12 @@ const MovieCard = ({card, history, updateLikes}) => {
     )
 }
 const mapStateToProps = state => {
-    
+
+    console.log( "in Movie state", state)
+
     return {
-        
+        movies: state.movies        
     }
 }
 
-export default withRouter(connect (mapStateToProps) (MovieCard))
+export default withRouter(connect (mapStateToProps, {updateLikes}) (MovieCard))

@@ -7,7 +7,7 @@ export default (state = [], action) =>{
         case "CLEAR_WISHLIST":
             return []
         case "DELETE_WISHLIST":
-            return state.filter(wishlist => wishlist.id === action.wishlistId ? false : true)  
+            return state.filter(wishlist => wishlist.id === action.wishlistId ? false : true)
         default:
             return state 
     }   

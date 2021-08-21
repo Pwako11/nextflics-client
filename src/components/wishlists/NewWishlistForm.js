@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {updateNewWishlistForm} from "../../actions/newWishlistForm.js";
 import {createWishlist} from "../../actions/wishlist.js";
 
-const NewWishlistForm = ({updateNewWishlistFormData, history, location, updateNewWishlistForm, createWishlist, userId}) => {
+const NewWishlistForm = ({updateNewWishlistFormData, history, location, updateNewWishlistForm, createWishlist, userId,wishlists}) => {
       
     const movieId = location.state.movieID
     const movieName = location.state.movieName
@@ -21,7 +21,8 @@ const NewWishlistForm = ({updateNewWishlistFormData, history, location, updateNe
         createWishlist({
             updateNewWishlistFormData,
             userId, 
-            location
+            location,
+            wishlists
         })
         .then((id)=> {
     
@@ -65,7 +66,8 @@ const mapStateToProps = state => {
     const userId = state.currentUser ? state.currentUser.data.id : ""
     return {
         updateNewWishlistFormData: state.newWishlistForm,
-        userId
+        userId,
+        wishlists: state.wishlist
     }
 }
 

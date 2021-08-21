@@ -3,20 +3,20 @@ import {connect} from 'react-redux';
 import {deleteWishlist} from '../../actions/wishlist';
 
 
-const WishlistCard = ({movies, card, history, deleteWishlist}) => {
+const WishlistCard = ({wishlists, card, history, deleteWishlist}) => {
 
     return (
         <div>
-            <p>{card.attributes.name} <button onClick={()=>deleteWishlist(card, history)}>Delete this Wishlist</button> </p>
+            <p>{card.attributes.name} <button onClick={()=>deleteWishlist(card, wishlists, history)}>Delete this Wishlist</button> </p>
         </div>
 
     )
 }
 
 const mapStateToProps = (state) => {
-
-    return {
-        movies: state.movies
+    
+    return { 
+        wishlists: state.wishlist
     }
 }
 

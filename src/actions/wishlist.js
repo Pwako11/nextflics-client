@@ -9,7 +9,6 @@ export const setWishlist = wishlist =>{
     }
 }
 export const addWishlist = list =>{
-    console.log( "We are adding a movie", list)
     return{
         type: "ADD_WISHLIST",
         list
@@ -23,7 +22,6 @@ export const clearWishlist = () => {
 }
 
 export const deleteWishlistSuccess = wishlist => {
-    console.log("in delete WishlistSuccess ", wishlist)
     return{
         type: "DELETE_WISHLIST",
         wishlist
@@ -54,8 +52,8 @@ export const getWishlist = () =>{
 
 export const createWishlist = (wishlistData) => {
 
+    let data;
 
-    console.log( "whislistData", wishlistData)
     return dispatch => {
 
         const setDataTransfer ={
@@ -66,7 +64,6 @@ export const createWishlist = (wishlistData) => {
             }
         }
         
-        console.log( "SetDataTransfer", setDataTransfer)
         return fetch("http://localhost:3010/api/v1/wishlists", {
             credentials: "include",
             method: "POST",
@@ -77,24 +74,29 @@ export const createWishlist = (wishlistData) => {
         })
         .then( response => response.json())
         .then(response =>{
-            console.log( "this the fetch return for wishlist create", response)
             if(response.error){
                 alert(response.error)
             }else{
-                dispatch(addWishlist(response))
-                dispatch(setWishlist(response))
-                dispatch(resetNewWishlistForm())
-                return response.data.id
+                data = response.data;
             }
+            return dispatch(addWishlist(response))
+        }).then(()=>{
+            return dispatch(setWishlist([...wishlistData.wishlists, data]))
+        }).then(()=>{
+            return dispatch(resetNewWishlistForm())
+        }).then(()=>{
+            return data.id
         })
         .catch(console.log)
     }
 }
 
-export const deleteWishlist = (wishlist, history) => {
+export const deleteWishlist = (wishlist, wishlists, history) => {
+
+    let updatedWishlists; 
 
     const wishlistId = wishlist.id 
-    
+
     return dispatch => {
    
         return fetch(`http://localhost:3010/api/v1/wishlists/${wishlistId}`, {
@@ -109,10 +111,13 @@ export const deleteWishlist = (wishlist, history) => {
             if(response.error){
                 alert(response.error)
             }else{
-                dispatch(deleteWishlistSuccess(wishlistId))
+                updatedWishlists= wishlists.filter(wishlist => wishlist.id === wishlistId ? false : true)
+                dispatch(deleteWishlistSuccess(wishlistId)) 
                 history.push(`/wishlists`) 
-                // return response.data.id
             }
+            
+        }).then(()=>{
+            return dispatch(setWishlist(updatedWishlists))
         })
         .catch(console.log)
     }

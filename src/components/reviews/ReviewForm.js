@@ -4,12 +4,11 @@ import {updateReviewForm} from "../../actions/reviewForm.js";
 
 // import {Link} from 'react-router-dom'
 
-const ReviewForm = ({formData, updateReviewForm, userId, handleSubmit, editMode}) => {
+const ReviewForm = ({formData, reviews, updateReviewForm, userId, handleSubmit, editMode}) => {
     console.log( "here is the review prop from state", formData)
     const {content, rate, user_id, movie_id} = formData
 
     const handleChange=(event)=>{
-        console.log("trigger reviewform handle change")
         const {name, value} = event.target
         updateReviewForm(name, value)
     }  
@@ -17,22 +16,22 @@ const ReviewForm = ({formData, updateReviewForm, userId, handleSubmit, editMode}
     return(
     <form  onSubmit={event =>{
         event.preventDefault()
-        console.log("In review form Submit")
-        handleSubmit(formData, userId)
-    } } >
-        <input
-            placeholder= "Type your review here "
-            name="content"
-            onChange={handleChange}
-            value= {content}
-        />
+        handleSubmit(formData, reviews, userId)
+        } } >
+        <label>
+            <textarea name= "content" placeholder= "Type your review here " onChange={handleChange} value= {content} ></textarea>
+        </label>
+        
         <br/>
-        <input
-            placeholder= "Rate this movie "
-            name="rate"
-            onChange={handleChange}
-            value= {rate}
-        />
+        <select name="rate" placeholder= "Rate this movie " onChange={handleChange}>
+            <option value= ""> select a movie rate ...</option>
+            <option value= "0"> Zero </option>
+            <option value= "1"> 1 star</option>
+            <option value= "2"> 2 stars</option>
+            <option value= "3"> 3 stars</option>
+            <option value= "4"> 4 stars</option>
+            <option value= "5"> 5 stars</option>
+        </select>
         <br/>
         <input
             type="hidden"
@@ -41,8 +40,6 @@ const ReviewForm = ({formData, updateReviewForm, userId, handleSubmit, editMode}
             onChange={handleChange}
             value= {user_id}
         />
-        <br/>
-
         <input
             type="hidden"
             placeholder= "Movie ID"
@@ -51,18 +48,18 @@ const ReviewForm = ({formData, updateReviewForm, userId, handleSubmit, editMode}
             value= {movie_id}
         />
         <br/>
-        
         <input type="submit" value={editMode ? "update review" : "Post your review"}/>
-    </form> 
+        <br/>
+    </form>
+ 
     )
 };
 
 const mapStateToProps = state => {
-
-    // console.log("Review Form state", state)
     const userId = state.currentUser ? state.currentUser.data.id : ""
     return {
         formData: state.reviewForm,
+        reviews: state.review,
         userId
     }
 }

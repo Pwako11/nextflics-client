@@ -4,7 +4,7 @@ import {updateNewRecommendationForm} from "../../actions/newRecommendationForm.j
 import {createRecommendation} from "../../actions/recommendations.js";
 // import {Link} from 'react-router-dom'
 
-const NewRecommendationForm = ({updateNewRecommendationFormData, history, location, updateNewRecommendationForm, createRecommendation, userId}) => {
+const NewRecommendationForm = ({updateNewRecommendationFormData, history, location, updateNewRecommendationForm, createRecommendation, userId, recommendations}) => {
      
     const movieId = location.state.movieID
     const movieName = location.state.movieName
@@ -25,51 +25,60 @@ const NewRecommendationForm = ({updateNewRecommendationFormData, history, locati
         console.log("inside Handle submit", updateNewRecommendationForm)
         
         event.preventDefault()
-        createRecommendation( 
+        createRecommendation({
             updateNewRecommendationFormData,
             movieName,
             userId,
             movieId,
             reviewId,
-            history
-        ) 
+            recommendations,
+            history} 
+            
+        ).then((id)=> {
+                history.push(`/recommendations/${id}`) 
+        })
     } 
 
     return(
-        <form  onSubmit={handleSubmit} >
-        <input
-            placeholder= "Movie name"
-            name="name"
-            onChange={handleChange}
-            value= {movieName}
-        />
-        <br/>
-        
-        <input
-            placeholder = "User ID "
-            name="user_id"
-            onChange={handleChange}
-            value= {userId}
-        />
-        <br/>
+       <div> 
+           <p>If youe would like to recommend {movieName} to others, click the button below</p>
+            <form  onSubmit={handleSubmit} >
+                <input
+                    type="hidden"
+                    placeholder= "Movie name"
+                    name="name"
+                    onChange={handleChange}
+                    value= {movieName}
+                />
+                <input
+                    type="hidden"
+                    placeholder = "User ID "
+                    name="user_id"
+                    onChange={handleChange}
+                    value= {userId}
+                />
+                <input
+                    type="hidden"
+                    placeholder= "Movie ID"
+                    name="movie_id"
+                    onChange={handleChange}
+                    value= {movieId}
+                />
+                <input
+                    type="hidden"
+                    placeholder= "Review ID"
+                    name="review_id"
+                    onChange={handleChange}
+                    value= {reviewId}
+                />
+                <input type="submit" value="Add to Recommendations" />
+            </form>
 
-        <input
-            placeholder= "Movie ID"
-            name="movie_id"
-            onChange={handleChange}
-            value= {movieId}
-        />
-        <br/>
-        <input
-            placeholder= "Review ID"
-            name="review_id"
-            onChange={handleChange}
-            value= {reviewId}
-        />
-        <br/>
-        
-        <input type="submit" value="Add to Recommendations" />
-    </form>
+            <p>If you would like to recommend a different movie return to the previos page</p>
+            <>
+                <button onClick={() => history.goBack()}>Back</button>
+            </>
+    </div>
 
     )
 };
@@ -81,7 +90,8 @@ const mapStateToProps = state => {
     console.log ( "in recommendation state" , state)
     return {
         updateNewRecommendationFormData: state.newRecommendationForm,
-        userId
+        userId,
+        recommendations: state.recommendation
     }
     
 }
