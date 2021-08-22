@@ -6,6 +6,8 @@ export const setMovies = movies =>{
 }
 
 export const getMovies = () => {
+    let allMovies;
+
     return dispatch => { 
         return fetch("http://localhost:3010/api/v1/movies", {
             credentials: "include",
@@ -16,10 +18,12 @@ export const getMovies = () => {
         })
         .then( response => response.json())
         .then(response =>{
+            console.log( "in get movies fetch response", response)
+            allMovies = response.data
             if(response.error){
                 alert(response.error)
             }else{
-                dispatch(setMovies (response))
+                dispatch(setMovies (allMovies))
             }
         })
         .catch(console.log)

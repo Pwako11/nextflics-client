@@ -13,10 +13,9 @@ const MovieCard = ({movies, card, history, updateLikes}) => {
     console.log("In movieCard - updateLikes", updateLikes)
 
     const movieID = card.id
-    const movieName = card.title
+    const movieName = card.attributes.title
     const wishlistPath = `/wishlists/new`
     const newReviewPath = '/reviews/new'
-  
     
     const wishlistRouteChange = () =>{
         history.push(wishlistPath, {
@@ -34,17 +33,17 @@ const MovieCard = ({movies, card, history, updateLikes}) => {
 
     return (
         <div className= { movieID } >
-            <h3 className="title">{card.title}</h3>
-            <h5>{card.genre}</h5>
+            <h3 className="title">{card.attributes.title}</h3>
+            <h5>{card.attributes.genre}</h5>
             <h5>content rating: { 
-                card.adult == true ? 
+                card.attributes.adult == true ? 
                 <h4>This movie has adult content</h4> : <h4>This movie is not adult rated</h4>
             }
             </h5>
-            <h5>rating:{card.rating}</h5>
-            <h5>release date:{card.release_date}</h5>  
-            <p>overview:{card.overview}</p>
-            <p>{card.likes} Likes </p>
+            <h5>rating:{card.attributes.rating}</h5>
+            <h5>release date:{card.attributes.release_date}</h5>  
+            <p>overview:{card.attributes.overview}</p>
+            <p>{card.attributes.likes} Likes </p>
             
             <button className="movie_like_btn" onClick={() =>updateLikes(card, movies)}>Like {'<3'}</button>
             
