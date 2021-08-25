@@ -33,10 +33,15 @@ class App extends React.Component{
 
   render(){
     const {loggedIn, currentUser, wishlists, movie, recommendations, reviews, preSetFormDataForEdit} =this.props
+
+    
     return (     
       <div className= "App">
-        <p>{ currentUser ? `Welcome  ${currentUser.data.attributes.name}` : "" }</p>  
-        { loggedIn ? <NavBar location={this.props.location}/> : null }
+        <div id="movie-header">
+          <h3>{ currentUser ? `Welcome  ${currentUser.data.attributes.name}` : "" }</h3> 
+          <br/> 
+          { loggedIn ? <NavBar location={this.props.location}/> : null }
+        </div>
         
         <Switch>
           <Route exact path='/' render={() => loggedIn ? <MainContainer /> : <Home />} />

@@ -2,7 +2,6 @@ import React from 'react' ;
 import {connect} from 'react-redux';
 import {updateNewRecommendationForm} from "../../actions/newRecommendationForm.js";
 import {createRecommendation} from "../../actions/recommendations.js";
-// import {Link} from 'react-router-dom'
 
 const NewRecommendationForm = ({updateNewRecommendationFormData, history, location, updateNewRecommendationForm, createRecommendation, userId, recommendations}) => {
      
@@ -86,8 +85,6 @@ const NewRecommendationForm = ({updateNewRecommendationFormData, history, locati
 const mapStateToProps = state => {
     const userId = state.currentUser ? state.currentUser.data.id : ""
 
-
-    console.log ( "in recommendation state" , state)
     return {
         updateNewRecommendationFormData: state.newRecommendationForm,
         userId,

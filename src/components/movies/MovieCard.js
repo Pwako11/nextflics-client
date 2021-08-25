@@ -32,7 +32,7 @@ const MovieCard = ({movies, card, history, updateLikes}) => {
     }
 
     return (
-        <div className= { movieID } >
+        <div className= "movie-card"  >
             <h3 className="title">{card.attributes.title}</h3>
             <h5>{card.attributes.genre}</h5>
             <h5>content rating: { 
@@ -43,9 +43,8 @@ const MovieCard = ({movies, card, history, updateLikes}) => {
             <h5>rating:{card.attributes.rating}</h5>
             <h5>release date:{card.attributes.release_date}</h5>  
             <p>overview:{card.attributes.overview}</p>
-            <p>{card.attributes.likes} Likes </p>
+            <button className="movie_like_btn" onClick={() =>updateLikes(card, movies)}>{'♡'}</button><p>{card.attributes.likes} likes </p>
             
-            <button className="movie_like_btn" onClick={() =>updateLikes(card, movies)}>Like {'<3'}</button>
             
             <button className="movie_selector_button" onClick={wishlistRouteChange}>Add to Wishlist </button>
             <button className="movie_selector_button" onClick={reviewRouteChange}>Write a Review </button> 

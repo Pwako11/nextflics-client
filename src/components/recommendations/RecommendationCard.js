@@ -21,8 +21,6 @@ const RecommendationCard = ({recommendations, recommendation, history, deleteRec
 }
 const mapStateToProps = (state) => {
 
-    console.log("In recommendation state", state)
-
     return {
         recommendations: state.recommendation
     }

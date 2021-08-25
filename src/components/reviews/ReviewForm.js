@@ -2,10 +2,8 @@ import React from 'react' ;
 import {connect} from 'react-redux';
 import {updateReviewForm} from "../../actions/reviewForm.js";
 
-// import {Link} from 'react-router-dom'
-
 const ReviewForm = ({formData, reviews, updateReviewForm, userId, handleSubmit, editMode}) => {
-    console.log( "here is the review prop from state", formData)
+
     const {content, rate, user_id, movie_id} = formData
 
     const handleChange=(event)=>{
