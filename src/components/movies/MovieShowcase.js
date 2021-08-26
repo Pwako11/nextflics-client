@@ -22,7 +22,7 @@ const MovieShowcase = ({cards}) => {
 
     return (
        <div className= "movie-showcase" >
-            <button className="movie_display_button" onClick={handleChange}>{showMovies? 'hide movies' : 'show Movies'}</button>
+             <button className="btn btn-secondary" onClick={handleChange}>{showMovies? 'hide movies' : 'show Movies'}</button>
             {showMovies && <div id= "movie_showcase">{ movieCard }</div> }
         </div>
     )
