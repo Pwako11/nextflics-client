@@ -3,7 +3,7 @@ import {connect} from "react-redux"
 import {withRouter} from 'react-router-dom';
 import {updateLikes} from '../../actions/movies';
 
-const MovieCard = ({movies, card, history, updateLikes}) => {
+const MovieCard = ({movies, card, history, updateLikes, loggedIn}) => {
 
     console.log({card})
     const movieID = card.id
@@ -27,11 +27,15 @@ const MovieCard = ({movies, card, history, updateLikes}) => {
         })
     }
 
+    const likeButton = loggedIn ? <><button className="movie_like_btn" onClick={() =>updateLikes(card, movies)}>{'♡'}</button><p>{card.attributes.likes} likes </p></> : ""
+    const wishlistButton = loggedIn ? <><button className="btn btn-secondary" onClick={wishlistRouteChange}>Add to Wishlist </button></> : ""
+    const reviewButton = loggedIn ? <><button className="btn btn-secondary" onClick={reviewRouteChange}>Write a Review </button> </> : ""
+
     return (
         <div className= "movie-card"  >
 
-            <img src={moviePoster} alt={movieName} className="movie-poster"  width="250" height="325" />
             <h3 className="title">{card.attributes.title}</h3>
+            <img src={moviePoster} alt={movieName} className="movie-poster"  width="250" height="325" />
             <h5>{card.attributes.genre}</h5>
             <h5>content rating: { 
                 card.attributes.adult === true ? 
@@ -41,13 +45,9 @@ const MovieCard = ({movies, card, history, updateLikes}) => {
             <h5>rating:{card.attributes.rating}</h5>
             <h5>release date:{card.attributes.release_date}</h5>  
             <p>overview:{card.attributes.overview}</p>
-            <button className="movie_like_btn" onClick={() =>updateLikes(card, movies)}>{'♡'}</button><p>{card.attributes.likes} likes </p>
-            
-            
-            <button className="btn btn-secondary" onClick={wishlistRouteChange}>Add to Wishlist </button>
-            <button className="btn btn-secondary" onClick={reviewRouteChange}>Write a Review </button> 
-           
-           
+            {likeButton}
+            {wishlistButton}
+            {reviewButton}   
         </div>
 
     )
@@ -57,7 +57,8 @@ const mapStateToProps = state => {
     console.log( "in Movie state", state)
 
     return {
-        movies: state.movies        
+        movies: state.movies,
+        loggedIn: !!state.currentUser        
     }
 }
 

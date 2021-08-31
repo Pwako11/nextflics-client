@@ -5,7 +5,7 @@ const Home = () => {
 
     return (
         
-        <div>
+        <div className ="welcome=loggedOut">
             <h2>Welcome, please <Link to="/Signup">sign up</Link> or <Link to="/Login">login</Link></h2>                 
             
         </div>

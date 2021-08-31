@@ -44,10 +44,9 @@ body, html, #root, .App {
   width: 100%;
   height: 100%;
   user-select: none;
-}
-#root{
   background-image: url("./assets/patterns/basic_backdrop.png");
   background-repeat: repeat;
+ 
 }
 
 /* #movie-header {
@@ -100,7 +99,7 @@ border-radius: .5em;
 .movies{
   background-color: rgba(2, 121, 139, .1);
   width: 1800px;
-  height: 900px;
+  height: 6500px;
   border: 5px solid #0b385f;
   border-bottom-style: dashed;
   color: #fff;
@@ -120,9 +119,9 @@ border-radius: .5em;
   width: 650px;
   height: 900px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  /* grid-template-columns: auto auto auto auto; */
-  grid-template-rows: 300px 300px;
+  /* grid-template-columns: 1fr 1fr 1fr;  */
+  grid-template-columns: auto auto auto;
+  grid-template-rows: 400px 400px;
   gap: 20px;
 }
 .movie-card{
