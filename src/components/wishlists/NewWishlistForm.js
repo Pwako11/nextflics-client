@@ -31,32 +31,35 @@ const NewWishlistForm = ({updateNewWishlistFormData, history, location, updateNe
     } 
 
     return(
-    <form  onSubmit={handleSubmit} >
+    <form class="mb-3 row" onSubmit={handleSubmit} >
+        <div class="col-auto">
+        
+        <label for="WishlistForm" class="form-label">Would you like to add this movie to your Wishlist? </label>
         <input
-            placeholder= "Movie name"
+            readonly class="form-control-plaintext" 
+            id="movieName"
             name="name"
             onChange={handleChange}
             value= {movieName}
-        />
-        <br/>
-        
+            
+        />    
         <input
             placeholder = "User ID "
+            type="hidden"
             name="user_id"
             onChange={handleChange}
             value= {userId}
         />
-        <br/>
-
         <input
             placeholder= "Movie ID"
+            type="hidden"
             name="movie_id"
             onChange={handleChange}
             value= {movieId}
         />
         <br/>
-        
         <input type="submit" className="btn btn-secondary" value="Add to wishlist" />
+        </div>
     </form> 
     )
 };

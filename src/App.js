@@ -37,6 +37,11 @@ class App extends React.Component{
 
     return (     
       <div className= "App">
+        <div className ="welcome">
+          <div className ="welcome=loggedIn" ><h3>{ currentUser ? `Welcome  ${currentUser.data.attributes.name}` : "" }</h3></div>
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">{ loggedIn ? <NavBar location={this.props.location}/> : null }</nav>
+        </div>
+
         <Switch>
           <Route exact path='/' render={() => loggedIn ? <MainContainer /> : <Home />} />
           <Route path='/signup' component={Signup}/>
@@ -80,11 +85,7 @@ class App extends React.Component{
             }
           }/>
         </Switch>
-          
-        <div className ="welcome">
-          <div className ="welcome=loggedIn" ><h3>{ currentUser ? `Welcome  ${currentUser.data.attributes.name}` : "" }</h3></div>
-          <nav class="navbar navbar-expand-lg navbar-light bg-light">{ loggedIn ? <NavBar location={this.props.location}/> : null }</nav>
-        </div>
+        
         <div className="movies" >
               <MovieShowcase cards= {movie} />
         </div>
