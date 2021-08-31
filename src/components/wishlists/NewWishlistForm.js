@@ -56,7 +56,7 @@ const NewWishlistForm = ({updateNewWishlistFormData, history, location, updateNe
         />
         <br/>
         
-        <input type="submit" value="Add to wishlist" />
+        <input type="submit" className="btn btn-secondary" value="Add to wishlist" />
     </form> 
     )
 };

@@ -87,7 +87,7 @@ class App extends React.Component{
 
             </Switch>
           
-            <div className="Movies" >
+            <div className="movies" >
               <MovieShowcase cards= {movie} />
             </div>
       </div>

@@ -7,7 +7,7 @@ const WishlistCard = ({wishlists, card, history, deleteWishlist}) => {
 
     return (
         <div>
-            <p>{card.attributes.name} <button onClick={()=>deleteWishlist(card, wishlists, history)}>Delete this Wishlist</button> </p>
+            <p>{card.attributes.name} <button className="btn btn-secondary" onClick={()=>deleteWishlist(card, wishlists, history)}>Delete this Wishlist</button> </p>
         </div>
 
     )

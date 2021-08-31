@@ -26,11 +26,11 @@ const ReviewCard = (props) =>{
 
             <Link to={`/reviews/${props.review.id}/edit`}>Edit this review</Link>
             <br/>
-            <p> Would you like to recommend this movie to other? <button className="review_selector_button" onClick={recommendationRouteChange}>Add to Recommendations </button></p>
+            <p> Would you like to recommend this movie to other? <button className="btn btn-secondary" onClick={recommendationRouteChange}>Add to Recommendations </button></p>
             
-            <button onClick={()=>deleteReview(props.reviews, props.review, props.history)()}>Delete this review</button>
+            <button className="btn btn-secondary" onClick={()=>deleteReview(props.reviews, props.review, props.history)()}>Delete this review</button>
             <>
-                <button onClick={() => props.history.goBack()}>Back</button>
+                <button className="btn btn-secondary" onClick={() => props.history.goBack()}>Back</button>
             </>
            
         </div>
