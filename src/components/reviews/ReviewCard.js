@@ -20,7 +20,8 @@ const ReviewCard = (props) =>{
    
     return (
         <div  >
-            <p>{`Review for ${reviewedMovie.title}:  `}{props.review.attributes.content }</p> 
+            <p>{`Review for ${reviewedMovie.attributes.title}:`}</p>
+            <p>{props.review.attributes.content }</p> 
 
             <p>Rating: {props.review.attributes.rate }</p>
 

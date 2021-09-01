@@ -6,14 +6,15 @@ const Recommendations = (props) =>{
 
     const recommendationCards = props.recommendations.length > 0 ?  
     
-    props.recommendations.map(rec => (<><Link key={rec.id} to ={`/recommendations/${rec.id}`}> {rec.attributes.name} </Link><br/></>)) : null
+    props.recommendations.map(rec => (<li><Link key={rec.id} to ={`/recommendations/${rec.id}`}> {rec.attributes.name} </Link><br/></li>)) : null
         
     return (
         <div>
-            {recommendationCards}
+            <lo>
+                {recommendationCards}
+            </lo>
         </div>
     )
-
 }
 
 const mapStateToProps = (state) => {
