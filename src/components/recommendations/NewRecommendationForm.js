@@ -9,8 +9,11 @@ const NewRecommendationForm = ({updateNewRecommendationFormData, history, locati
     const movieName = location.state.movieName
     const reviewId = location.state.reviewID
 
+    
     console.log( "here is the location prop from state", location)
-
+    console.log( "here is the movieId", movieId)
+    console.log( "here is the movieName", movieName)
+  
     const {name, user_id, movie_id, review_id} = updateNewRecommendationFormData
 
     const handleChange=(event)=>{
@@ -85,6 +88,7 @@ const NewRecommendationForm = ({updateNewRecommendationFormData, history, locati
 const mapStateToProps = state => {
     const userId = state.currentUser ? state.currentUser.data.id : ""
 
+    console.log(" you are in NewRecommendation Form state ", state)
     return {
         updateNewRecommendationFormData: state.newRecommendationForm,
         userId,

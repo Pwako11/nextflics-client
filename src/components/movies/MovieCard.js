@@ -5,14 +5,13 @@ import {updateLikes} from '../../actions/movies';
 
 const MovieCard = ({movies, card, history, updateLikes, loggedIn}) => {
 
-    console.log({card})
     const movieID = card.id
     const movieName = card.attributes.title
     const moviePoster = card.attributes.poster_path
+    const movieLikes = card.attributes.likes
     const wishlistPath = `/wishlists/new`
     const newReviewPath = '/reviews/new'
-    console.log("path to poster", moviePoster)
-    
+
     const wishlistRouteChange = () =>{
         history.push(wishlistPath, {
             movieID: movieID,
@@ -27,7 +26,7 @@ const MovieCard = ({movies, card, history, updateLikes, loggedIn}) => {
         })
     }
 
-    const likeButton = loggedIn ? <><button className="movie_like_btn" onClick={() =>updateLikes(card, movies)}>{'♡'}</button><p>{card.attributes.likes} likes </p></> : ""
+    const likeButton = loggedIn ? <><button className="movie_like_btn" onClick={() =>updateLikes(card, movies, movieID)}>{'♡'}</button><p>{movieLikes} likes </p></> : ""
     const wishlistButton = loggedIn ? <><button className="btn btn-secondary" onClick={wishlistRouteChange}>Add to Wishlist </button></> : ""
     const reviewButton = loggedIn ? <><button className="btn btn-secondary" onClick={reviewRouteChange}>Write a Review </button> </> : ""
 
@@ -49,12 +48,10 @@ const MovieCard = ({movies, card, history, updateLikes, loggedIn}) => {
             {wishlistButton}
             {reviewButton}   
         </div>
-
     )
+
 }
 const mapStateToProps = state => {
-
-    console.log( "in Movie state", state)
 
     return {
         movies: state.movies,

@@ -10,9 +10,9 @@ const Recommendations = (props) =>{
         
     return (
         <div>
-            <lo>
+            <ol>
                 {recommendationCards}
-            </lo>
+            </ol>
         </div>
     )
 }

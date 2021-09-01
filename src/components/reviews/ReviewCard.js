@@ -13,7 +13,7 @@ const ReviewCard = (props) =>{
     const recommendationRouteChange = () =>{
         props.history.push(recommendationPath, {
             movieID: movieID,
-            movieName: reviewedMovie.title,
+            movieName: reviewedMovie.attributes.title,
             reviewID: reviewID
         })
     }

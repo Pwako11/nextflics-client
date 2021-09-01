@@ -6,6 +6,8 @@ import ReviewForm from "./ReviewForm.js";
 
 const ReviewNewFormWrapper = ({ history, location, createReview }) => {
 
+    console.log("in reviewNewForm location", location)
+
     const movieID = location.state.movieID;
     const movieName = location.state.movieName
 

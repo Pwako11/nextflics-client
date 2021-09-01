@@ -5,21 +5,15 @@ import MovieCard from './MovieCard.js';
 const MovieShowcase = ({cards, loggedIn}) => { 
 
     const [showMovies, setShowMovies] = useState(false);
-
-    console.log("firsrt showMovies", showMovies)
     
     const handleChange = () =>{
-
         setShowMovies(!showMovies)
     }
-
-    console.log("after handle Change", showMovies)
 
     const movieCard = cards.length > 0 ? cards.map(  function(list) {
         return <MovieCard key={list.id} card={list} />
         })
         : null;
-
 
     const optoinOne = <>
         <button className="btn btn-secondary" onClick={handleChange}>{showMovies? 'hide movies' : 'show Movies'}</button>

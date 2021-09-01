@@ -164,15 +164,15 @@ export const deleteReview = (reviews, review, history) => {
             if(response.error){
                 alert(response.error)
             }else{
-                updatedReviews = reviews.filter(review => review.id === reviewId ? false : true) 
+                updatedReviews = reviews.filter(review => review.id === reviewId ? false : true)
+                console.log( "After delete updatedReviews", updatedReviews)
+                console.log("delete review step #4")
+                dispatch(deleteReviewSuccess(reviewId))
                 history.push(`/reviews`)
             }
-        }).then(() =>{
-            console.log("delete review step #4")
-            return dispatch(deleteReviewSuccess(reviewId)) 
         }).then(()=>{
             console.log("delete review step #5")
-            return dispatch(setReview(updatedReviews))
+            dispatch(setReview(updatedReviews))
         })
         .catch(console.log)
     }
