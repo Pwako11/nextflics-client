@@ -19,7 +19,7 @@ const MainContainer = ({recommendation, review, wishlist}) => {
         <div className="mainContainer">
             <div className= "whislists">
                 {wishlistsTag}
-                <Wishlist />
+               <Wishlist/>  
             </div>
             
             <div className= "recommendation">
