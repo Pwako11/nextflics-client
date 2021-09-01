@@ -50,6 +50,9 @@ const NewWishlistForm = ({updateNewWishlistFormData, history, location, updateNe
             onChange={handleChange}
             value= {userId}
         />
+        <div class="invalid-feedback">
+            You must be signed in to add a wishlist.
+        </div>
         <input
             placeholder= "Movie ID"
             type="hidden"
@@ -57,6 +60,10 @@ const NewWishlistForm = ({updateNewWishlistFormData, history, location, updateNe
             onChange={handleChange}
             value= {movieId}
         />
+        <div class="invalid-feedback">
+            You must be signed in to add a wishlist.
+        </div>
+        
         <br/>
         <input type="submit" className="btn btn-secondary" value="Add to wishlist" />
         </div>
