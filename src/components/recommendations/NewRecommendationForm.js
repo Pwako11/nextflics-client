@@ -3,9 +3,11 @@ import {connect} from 'react-redux';
 import {updateNewRecommendationForm} from "../../actions/newRecommendationForm.js";
 import {createRecommendation} from "../../actions/recommendations.js";
 
-const NewRecommendationForm = ({updateNewRecommendationFormData, history, location, updateNewRecommendationForm, createRecommendation, userId, recommendations}) => {
-     
+const NewRecommendationForm = ({updateNewRecommendationFormData, history, location, movies, updateNewRecommendationForm, createRecommendation, userId, recommendations}) => {
+     console.log("recommendations form ", location)
     const movieId = location.state.movieID
+    const recommendedMovie = movies.find(element => element.id == movieId);
+    const moviePoster = recommendedMovie.attributes.poster_path
     const movieName = location.state.movieName
     const reviewId = location.state.reviewID
 
@@ -42,8 +44,10 @@ const NewRecommendationForm = ({updateNewRecommendationFormData, history, locati
     } 
 
     return(
-       <div> 
-           <p>If youe would like to recommend {movieName} to others, click the button below</p>
+       <div className="recommendationForm"> 
+       <img src={moviePoster} alt={movieName} className="movie-poster"  width="250" height="325" />
+       <br/>
+           <p>If you would like to recommend {movieName} to others, click the button below</p>
             <form  onSubmit={handleSubmit} >
                 <input
                     type="hidden"
@@ -92,7 +96,8 @@ const mapStateToProps = state => {
     return {
         updateNewRecommendationFormData: state.newRecommendationForm,
         userId,
-        recommendations: state.recommendation
+        recommendations: state.recommendation, 
+        movies: state.movies
     }
     
 }

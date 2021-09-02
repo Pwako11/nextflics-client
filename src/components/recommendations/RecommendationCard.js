@@ -3,18 +3,20 @@ import {connect} from 'react-redux';
 import {deleteRecommendation} from '../../actions/recommendations';
 
 
-const RecommendationCard = ({recommendations, recommendation, history, deleteRecommendation}) =>{
+const RecommendationCard = ({recommendations, movies, recommendation, history, deleteRecommendation}) =>{
 
-    console.log( "in recommendationCard", recommendation)
+    
 
     const movieID = recommendation.relationships.movie.data.id
+    const recommendedMovie = movies.find(element => element.id == movieID);
+    const moviePoster = recommendedMovie.attributes.poster_path
     const movieName = recommendation.attributes.name 
         
    
     return(
-        <div className={movieID}>
+        <div className="recommendationCard">
 
-            <p>{movieName} <button onClick={()=>deleteRecommendation(recommendations, recommendation, history)}>Delete this Recommendation</button> </p>
+            <p>{movieName} <br/> <img src={moviePoster} alt={movieName} className="movie-poster"  width="250" height="325" /><br/><button onClick={()=>deleteRecommendation(recommendations, recommendation, history)}>Delete this Recommendation</button> </p>
            
         </div>
     ) 
@@ -22,7 +24,8 @@ const RecommendationCard = ({recommendations, recommendation, history, deleteRec
 const mapStateToProps = (state) => {
 
     return {
-        recommendations: state.recommendation
+        recommendations: state.recommendation, 
+        movies: state.movies
     }
 }
 
