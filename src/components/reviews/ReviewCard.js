@@ -32,7 +32,7 @@ const ReviewCard = (props) =>{
             <br/>
             <p> Would you like to recommend this movie to other?<br/> <button className="btn btn-secondary" onClick={recommendationRouteChange}>Add to Recommendations </button></p>
             
-            <button className="btn btn-secondary" onClick={()=>deleteReview(props.reviews, props.review, props.history)()}>Delete this review</button>
+            <button className="btn btn-secondary" onClick={()=>props.deleteReview(props.reviews, props.review, props.history)}>Delete this review</button>
             <>
                 <button className="btn btn-secondary" onClick={() => props.history.goBack()}>Back</button>
             </>

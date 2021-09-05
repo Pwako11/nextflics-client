@@ -37,58 +37,65 @@ class App extends React.Component{
 
     return (     
       <div className= "App">
-        <div className ="welcome">
-          <div className ="welcome-loggedIn" ><h3>{ currentUser ? `Welcome  ${currentUser.data.attributes.name}` : "" }</h3></div>
-          <nav class="navbar navbar-expand-lg navbar-light bg-light">{ loggedIn ? <NavBar location={this.props.location}/> : null }</nav>
+          <div className ="welcome">
+            <div className ="welcome-loggedIn" ><h3>{ currentUser ? `Welcome  ${currentUser.data.attributes.name}` : "" }</h3></div>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">{ loggedIn ? <NavBar location={this.props.location}/> : null }</nav>
+          </div>
+      
+      <div className="main">
+          <div className="routes">
+            <Switch>
+              <Route exact path='/' render={() => loggedIn ? <MainContainer /> : <Home />} />
+              <Route path='/signup' component={Signup}/>
+              <Route path='/login' component={Login}/> 
+              <Route path='/logout' component={Logout}/>
+              <Route exact path='/recommendations' component={Recommendations}/>
+              <Route exact path='/recommendations/new' component={NewRecommendationForm}/>
+              <Route exact path='/recommendations/:id' render={props =>{
+                const recommendation =  recommendations.find(rec => rec.id === props.match.params.id)
+                return<RecommendationCard recommendation={recommendation}{...props}/>
+                }
+              }/>
+              <Route exact path='/recommendations/:id/edit' component={props =>{
+                const recommendation =  recommendations.find(rec => rec.id === props.match.params.id)
+                return<NewRecommendationForm recommendation={recommendation}{...props}/>
+                }
+              }/>
+              <Route exact path='/reviews' component={Reviews} />
+              <Route exact path='/reviews/new' component={ReviewNewFormWrapper}/>
+              <Route exact path='/reviews/:id' render={props =>{
+                const review =  reviews.find(review => review.id === props.match.params.id)            
+                return<ReviewCard review={review}{...props}/>
+                }
+              }/>
+              <Route exact path='/reviews/:id/edit' render={props =>{
+                const review =  reviews.find(review => review.id === props.match.params.id)          
+                review && preSetFormDataForEdit(review)
+                return<ReviewEditFormWrapper review={review}{...props}/>
+                }
+              }/>
+              <Route exact path='/wishlists' component={Wishlist}/>
+              <Route exact path='/wishlists/new' component={NewWishlistForm}/>
+              <Route exact path='/wishlists/:id' render={props =>{
+                const card =  wishlists.find(wishlist => wishlist.id === props.match.params.id)
+                return<WishlistCard card={card}{...props}/>
+                }
+              }/>
+              <Route exact path='/wishlists/:id/edit' component={props =>{
+                const card =  wishlists.find(wishlist => wishlist.id === props.match.params.id)
+                return<NewWishlistForm card={card}{...props}/>
+                }
+              }/>
+            </Switch>
+          </div>
+
+          <div className="options">
+            <div className="movies" >
+                  <MovieShowcase cards= {movie} />
+            </div>
+          </div>
         </div>
 
-        <Switch>
-          <Route exact path='/' render={() => loggedIn ? <MainContainer /> : <Home />} />
-          <Route path='/signup' component={Signup}/>
-          <Route path='/login' component={Login}/> 
-          <Route path='/logout' component={Logout}/>
-          <Route exact path='/recommendations' component={Recommendations}/>
-          <Route exact path='/recommendations/new' component={NewRecommendationForm}/>
-          <Route exact path='/recommendations/:id' render={props =>{
-            const recommendation =  recommendations.find(rec => rec.id === props.match.params.id)
-            return<RecommendationCard recommendation={recommendation}{...props}/>
-            }
-          }/>
-          <Route exact path='/recommendations/:id/edit' component={props =>{
-            const recommendation =  recommendations.find(rec => rec.id === props.match.params.id)
-            return<NewRecommendationForm recommendation={recommendation}{...props}/>
-            }
-          }/>
-          <Route exact path='/reviews' component={Reviews} />
-          <Route exact path='/reviews/new' component={ReviewNewFormWrapper}/>
-          <Route exact path='/reviews/:id' render={props =>{
-            const review =  reviews.find(review => review.id === props.match.params.id)            
-            return<ReviewCard review={review}{...props}/>
-            }
-          }/>
-          <Route exact path='/reviews/:id/edit' render={props =>{
-            const review =  reviews.find(review => review.id === props.match.params.id)          
-            review && preSetFormDataForEdit(review)
-            return<ReviewEditFormWrapper review={review}{...props}/>
-            }
-          }/>
-          <Route exact path='/wishlists' component={Wishlist}/>
-          <Route exact path='/wishlists/new' component={NewWishlistForm}/>
-          <Route exact path='/wishlists/:id' render={props =>{
-            const card =  wishlists.find(wishlist => wishlist.id === props.match.params.id)
-            return<WishlistCard card={card}{...props}/>
-            }
-          }/>
-          <Route exact path='/wishlists/:id/edit' component={props =>{
-            const card =  wishlists.find(wishlist => wishlist.id === props.match.params.id)
-            return<NewWishlistForm card={card}{...props}/>
-            }
-          }/>
-        </Switch>
-        
-        <div className="movies" >
-              <MovieShowcase cards= {movie} />
-        </div>
       </div>
     );
   }

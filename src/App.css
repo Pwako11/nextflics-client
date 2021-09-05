@@ -37,7 +37,7 @@
   }
 } */
 
-body, html, #root, .App {
+body, .card {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
@@ -46,9 +46,11 @@ body, html, #root, .App {
   user-select: none;
   background-image: url("./assets/patterns/basic_backdrop.png");
   background-repeat: repeat;
- 
 }
-
+.App{
+  display: flex;
+  flex-flow: wrap;
+}
 /* #movie-header {
   display: flex;
   justify-content: center;
@@ -61,20 +63,19 @@ body, html, #root, .App {
 .nav {
   display: flex;
   flex: 1; 
-  position: -webkit-sticky; /* Safari */
   position: sticky;
   top: 0;
-  float: left;
   list-style-type: none;
   margin: 0;
   padding: 0;
   text-align: center;
   padding: 14px 16px;
   overflow: hidden;
-  background-color: rgb(219, 211, 211);
+  background-color: rgb(151, 128, 128);
+  border-radius: .5em;
 }
 .nav a:hover {
-  color: #1abc9c !important;
+  color: #dff0ed !important;
 }
 
 *{
@@ -82,35 +83,38 @@ body, html, #root, .App {
 }
 
 .mainContainer{
-font-family: sans-serif;
-justify-content: center;
-align-content: center;
-position: absolute;
-margin-top: 30px;
-margin-right: 30px;
-margin-bottom: 40px;
-margin-left: 10px;
-border: 40px;
-padding: 40px;
-border: 2px solid rgb(79,185,227);
-border-radius: .5em;
+  order: 1;
+  position: sticky;
+  font-family: sans-serif;
+  justify-content: center;
+  align-content: center;
+  position: absolute;
+  margin-top: 30px;
+  margin-right: 30px;
+  margin-bottom: 40px;
+  margin-left: 10px;
+  border: 40px;
+  padding: 40px;
+  border: 2px solid rgb(79,185,227);
+  border-radius: .5em;
 }
 
 #root, #movie-showcase {
-  display: flex;
+  position: sticky;
   align-items: center;
   justify-content: center;
 }
 
 .movies{
-  background-color: rgba(2, 121, 139, .1);
   position: relative;
+  display: flex;
   left: 300px;
   width: 1800px;
   height: 40px;
   color: #fff;
 }
 .movie-showcase {
+  order: 6;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -119,7 +123,9 @@ border-radius: .5em;
 }
 
 #movie_showcase {
-  position: relative;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 50px; left: 60px;
   flex-direction: row;
   flex-wrap: wrap;
   width: 1700px;
@@ -146,11 +152,11 @@ border-radius: .5em;
 }
 
 .wishlistcard{
+  order: 2;
   font-family: sans-serif;
   text-align: center;
   justify-content: center;
   align-content: center;
-  position: absolute;
   margin-top: 30px;
   margin-right: 30px;
   margin-bottom: 40px;
@@ -162,12 +168,29 @@ border-radius: .5em;
   left: 300px;
 }
 
-.reviewcard{
+.wishlist{
   font-family: sans-serif;
   text-align: center;
   justify-content: center;
   align-content: center;
-  position: absolute;
+  margin-top: 30px;
+  margin-right: 30px;
+  margin-bottom: 40px;
+  margin-left: 20px;
+  border: 20px;
+  padding: 30px;
+  border: 2px solid rgb(79,185,227);
+  border-radius: .5em;
+  left: 300px;
+
+}
+
+.reviewcard{
+  order: 3;
+  font-family: sans-serif;
+  text-align: center;
+  justify-content: center;
+  align-content: center;
   margin-top: 30px;
   margin-right: 30px;
   margin-bottom: 40px;
@@ -180,11 +203,11 @@ border-radius: .5em;
 }
 
 .recommendationForm{
+  order: 4;
   font-family: sans-serif;
   text-align: center;
   justify-content: center;
   align-content: center;
-  position: absolute;
   margin-top: 30px;
   margin-right: 30px;
   margin-bottom: 40px;
@@ -197,11 +220,11 @@ border-radius: .5em;
 }
 
 .recommendationCard{
+  order: 5;
   font-family: sans-serif;
   text-align: center;
   justify-content: center;
   align-content: center;
-  position: absolute;
   margin-top: 30px;
   margin-right: 30px;
   margin-bottom: 40px;
@@ -249,4 +272,10 @@ footer.branding {
   border-bottom:0;
   position: fixed;
   bottom: 0;
+}
+
+.card {
+  border: 2px solid rgb(79, 185, 227);
+  padding: 10px;
+  margin: 0 0 1em 0;
 }

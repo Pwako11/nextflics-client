@@ -1,5 +1,5 @@
 import {resetReviewForm } from "./reviewForm.js";
-// import {updateReviewForm } from "./reviewForm.js";
+import {setRecommendation} from "./recommendations.js";
 
 // sync actions
 
@@ -101,11 +101,6 @@ export const createReview = (reviewData, reviews, userId, movieID) => {
 
 export const updateReview = (reviewData, reviews, review, history) => {
 
-    // console.log("reviewData", reviewData)
-    // console.log("credentials", reviews)
-    // console.log("review", review)
-    // console.log("history", history)
-
     let updatedReview;
     const reviewId = review.id
       return dispatch => {
@@ -143,6 +138,7 @@ export const updateReview = (reviewData, reviews, review, history) => {
 
 export const deleteReview = (reviews, review, history) => {
     console.log("delete review step #1")
+    console.log("delete review", review)
     let updatedReviews; 
 
     const reviewId = review.id 

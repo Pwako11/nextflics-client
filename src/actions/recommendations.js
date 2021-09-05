@@ -2,6 +2,7 @@ import { resetNewRecommendationForm } from "./newRecommendationForm.js"
 
 //sync actions  
 export const setRecommendation = recommendation =>{
+    console.log("sync action  Recommendation", recommendation)
     return {
         type: "SET_RECOMMENDATION",
         recommendation
@@ -17,7 +18,7 @@ export const addRecommendation = recommendation =>{
 
 export const clearRecommendation = () => {
     return{
-        type: "CLEAR_REVIEW"
+        type: "CLEAR_RECOMMENDATION"
     }
 }
 
