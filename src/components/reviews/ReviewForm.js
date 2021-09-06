@@ -12,44 +12,46 @@ const ReviewForm = ({formData, reviews, updateReviewForm, userId, handleSubmit, 
     }  
 
     return(
-    <form  onSubmit={event =>{
-        event.preventDefault()
-        handleSubmit(formData, reviews, userId)
-        } } >
-        <label>
-            <textarea name= "content" placeholder= "Type your review here " onChange={handleChange} value= {content} ></textarea>
-        </label>
+        <form  onSubmit={event =>{
+            event.preventDefault()
+            handleSubmit(formData, reviews, userId)
+            } } >
+            <label>
+                <textarea  class= "form-control" name= "content" placeholder= "Type your review here " onChange={handleChange} value= {content} ></textarea>
+            </label>
+            
+            <br/>
+            <select class= "form-control" name="rate" placeholder= "Rate this movie " onChange={handleChange}>
+                <option value= ""> select a movie rate ...</option>
+                <option value= "0"> Zero </option>
+                <option value= "1"> 1 star</option>
+                <option value= "2"> 2 stars</option>
+                <option value= "3"> 3 stars</option>
+                <option value= "4"> 4 stars</option>
+                <option value= "5"> 5 stars</option>
+            </select>
+            <br/>
+            <input
+                class= "form-control"
+                type="hidden"
+                placeholder = "User ID "
+                name="user_id"
+                onChange={handleChange}
+                value= {user_id}
+            />
+            <input
+                class= "form-control"
+                type="hidden"
+                placeholder= "Movie ID"
+                name="movie_id"
+                onChange={handleChange}
+                value= {movie_id}
+            />
+            <br/>
+            <input class="btn btn-secondary" type="submit" value={editMode ? "update review" : "Post your review"}/>
+            <br/>
+        </form>
         
-        <br/>
-        <select name="rate" placeholder= "Rate this movie " onChange={handleChange}>
-            <option value= ""> select a movie rate ...</option>
-            <option value= "0"> Zero </option>
-            <option value= "1"> 1 star</option>
-            <option value= "2"> 2 stars</option>
-            <option value= "3"> 3 stars</option>
-            <option value= "4"> 4 stars</option>
-            <option value= "5"> 5 stars</option>
-        </select>
-        <br/>
-        <input
-            type="hidden"
-            placeholder = "User ID "
-            name="user_id"
-            onChange={handleChange}
-            value= {user_id}
-        />
-        <input
-            type="hidden"
-            placeholder= "Movie ID"
-            name="movie_id"
-            onChange={handleChange}
-            value= {movie_id}
-        />
-        <br/>
-        <input type="submit" value={editMode ? "update review" : "Post your review"}/>
-        <br/>
-    </form>
- 
     )
 };
 

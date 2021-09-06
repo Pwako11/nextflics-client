@@ -2,14 +2,12 @@ import { resetNewRecommendationForm } from "./newRecommendationForm.js"
 
 //sync actions  
 export const setRecommendation = recommendation =>{
-    console.log("sync action  Recommendation", recommendation)
     return {
         type: "SET_RECOMMENDATION",
         recommendation
     }
 }
 export const addRecommendation = recommendation =>{
-    console.log( "We are adding a recommendation", recommendation)
     return{
         type: "ADD_RECOMMENDATION",
         recommendation
@@ -23,7 +21,6 @@ export const clearRecommendation = () => {
 }
 
 export const deleteRecommendationSuccess = recommendation => {
-    console.log("in delete Recommendation ", recommendation)
     return{
         type: "DELETE_RECOMMENDATION",
         recommendation
@@ -52,7 +49,6 @@ export const getRecommendations = () =>{
 }
 
 export const createRecommendation = (recommendation ) => {
-console.log("Inside createRecommenation - check for props ", recommendation)
 
     let data;
     
@@ -66,7 +62,6 @@ console.log("Inside createRecommenation - check for props ", recommendation)
                 review_id: recommendation.reviewId
             }
         }
-        console.log("in create Recommendation post", setDataTransfer)
 
         return fetch("http://localhost:3010/api/v1/recommendations", {
             credentials: "include",
@@ -78,7 +73,6 @@ console.log("Inside createRecommenation - check for props ", recommendation)
         })
         .then( response => response.json())
         .then(response =>{
-            console.log( "this the fetch return for recommendations create", response)
             if(response.error){
                 alert(response.error)
             }else{
@@ -120,20 +114,14 @@ export const deleteRecommendation = (recommendations, recommendation, history) =
         })
         .then( resp => resp.json())
         .then( response =>{
-            console.log("fetch step 2")
-            console.log("In delete recommendation response", response )
             if(response.error){
                 alert(response.error)
             }else{
-                console.log("fetch step 3")
                 updateRecommendations = recommendations.filter(recommendation => recommendation.id === recommendationId ? false : true)
-                console.log("fetch step 4")
                 history.push(`/recommendations`)
-                console.log("fetch step 5")
                 dispatch(deleteRecommendationSuccess(recommendationId))
             }
         }).then(()=>{
-            console.log("fetch step 6")
             return dispatch(setRecommendation(updateRecommendations))
         })
         .catch(console.log)

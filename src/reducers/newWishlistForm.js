@@ -7,7 +7,7 @@ const initialState = {
 }
 
 export default (state = initialState, action) => {
-    // console.log("this is the incoming action", action)
+   
     switch (action.type){
         case "UPDATE_NEW_WISHLIST_FORM":
             return {

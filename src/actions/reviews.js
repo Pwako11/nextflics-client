@@ -1,5 +1,4 @@
 import {resetReviewForm } from "./reviewForm.js";
-import {setRecommendation} from "./recommendations.js";
 
 // sync actions
 
@@ -124,7 +123,6 @@ export const updateReview = (reviewData, reviews, review, history) => {
           .then( response => response.json())
           .then(response =>{
             updatedReview = response.data
-              console.log( "this the fetch return for review create", response.data )
               if(response.error){
                   alert(response.error)
               }else{
@@ -137,12 +135,9 @@ export const updateReview = (reviewData, reviews, review, history) => {
   }
 
 export const deleteReview = (reviews, review, history) => {
-    console.log("delete review step #1")
-    console.log("delete review", review)
     let updatedReviews; 
 
     const reviewId = review.id 
-    console.log( "reviewId", reviewId)
 
     return dispatch => {
         console.log("delete review step #2")
@@ -155,19 +150,14 @@ export const deleteReview = (reviews, review, history) => {
         })
         .then( resp => resp.json())
         .then(response =>{
-            console.log("delete review step #3")
-            console.log( "In delete review response", response )
             if(response.error){
                 alert(response.error)
             }else{
                 updatedReviews = reviews.filter(review => review.id === reviewId ? false : true)
-                console.log( "After delete updatedReviews", updatedReviews)
-                console.log("delete review step #4")
                 dispatch(deleteReviewSuccess(reviewId))
                 history.push(`/reviews`)
             }
         }).then(()=>{
-            console.log("delete review step #5")
             dispatch(setReview(updatedReviews))
         })
         .catch(console.log)

@@ -16,7 +16,7 @@ const MovieShowcase = ({cards, loggedIn}) => {
         : null;
 
     const optoinOne = <>
-        <button className="btn btn-secondary" onClick={handleChange}>{showMovies? 'hide movies' : 'show Movies'}</button>
+        <button className="btn btn-secondary" id= "movieButton" onClick={handleChange}>{showMovies? 'hide movies' : 'show Movies'}</button>
        {showMovies && <div id= "movie_showcase">{ movieCard }</div> } </>
 
     const movieButton = loggedIn ? optoinOne : <div id= "movie_showcase">{ movieCard }</div>  

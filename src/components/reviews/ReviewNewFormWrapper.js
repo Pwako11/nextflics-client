@@ -6,8 +6,6 @@ import ReviewForm from "./ReviewForm.js";
 
 const ReviewNewFormWrapper = ({ history, location, createReview }) => {
 
-    console.log("in reviewNewForm location", location)
-
     const movieID = location.state.movieID;
     const movieName = location.state.movieName
 
@@ -18,10 +16,13 @@ const ReviewNewFormWrapper = ({ history, location, createReview }) => {
          })
     }
     return (
-         <>
+         <div className= "reviewForm">
             <h4>Write a review and rate: {movieName}</h4>
             < ReviewForm history={history} handleSubmit={handleSubmit} />
-        </>
+            <>
+                <button className="btn btn-secondary" onClick={() => history.goBack()}>Back</button>
+            </>
+        </div>
     )
 };
 

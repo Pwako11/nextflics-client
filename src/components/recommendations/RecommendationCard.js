@@ -16,7 +16,7 @@ const RecommendationCard = ({recommendations, movies, recommendation, history, d
     return(
         <div className="recommendationCard">
 
-            <p>{movieName} <br/> <img src={moviePoster} alt={movieName} className="movie-poster"  width="250" height="325" /><br/><button onClick={()=>deleteRecommendation(recommendations, recommendation, history)}>Delete this Recommendation</button> </p>
+            <p>{movieName} <br/> <img src={moviePoster} alt={movieName} className="movie-poster"  width="250" height="325" /><br/><button  class="btn btn-secondary" onClick={()=>deleteRecommendation(recommendations, recommendation, history)}>Delete this Recommendation</button>  <button className="btn btn-secondary" onClick={() => history.goBack()}>Back</button></p>
            
         </div>
     ) 

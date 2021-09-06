@@ -39,7 +39,7 @@ class App extends React.Component{
       <div className= "App">
           <div className ="welcome">
             <div className ="welcome-loggedIn" ><h3>{ currentUser ? `Welcome  ${currentUser.data.attributes.name}` : "" }</h3></div>
-            <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">{ loggedIn ? <NavBar location={this.props.location}/> : null }</nav>
+            <nav class="navbar navbar-light">{ loggedIn ? <NavBar location={this.props.location}/> : null }</nav>
           </div>
       
       <div className="main">
@@ -86,7 +86,7 @@ class App extends React.Component{
                 return<NewWishlistForm card={card}{...props}/>
                 }
               }/>
-            </Switch>
+            </Switch> 
           </div>
 
           <div className="options">

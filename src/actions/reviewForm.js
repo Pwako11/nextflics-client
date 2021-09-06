@@ -1,6 +1,5 @@
 export const updateReviewForm = (name, value) =>{
     const formData= {name, value}
-    console.log({formData})
     return {
         type: "UPDATE_REVIEW_FORM", 
         formData: {name, value}

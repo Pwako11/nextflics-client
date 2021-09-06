@@ -9,7 +9,7 @@ const Recommendations = (props) =>{
     props.recommendations.map(rec => (<li><Link key={rec.id} to ={`/recommendations/${rec.id}`}> {rec.attributes.name} </Link><br/></li>)) : null
         
     return (
-        <div>
+        <div className="recommendations">
             <ol>
                 {recommendationCards}
             </ol>

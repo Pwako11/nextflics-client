@@ -77,12 +77,12 @@ const NewRecommendationForm = ({updateNewRecommendationFormData, history, locati
                     onChange={handleChange}
                     value= {reviewId}
                 />
-                <input type="submit" value="Add to Recommendations" />
+                <input class="btn btn-secondary" type="submit" value="Add to Recommendations" />
             </form>
 
             <p>If you would like to recommend a different movie return to the previos page</p>
             <>
-                <button onClick={() => history.goBack()}>Back</button>
+                <button className="btn btn-secondary" onClick={() => history.goBack()}>Back</button>
             </>
     </div>
 
@@ -92,7 +92,6 @@ const NewRecommendationForm = ({updateNewRecommendationFormData, history, locati
 const mapStateToProps = state => {
     const userId = state.currentUser ? state.currentUser.data.id : ""
 
-    console.log(" you are in NewRecommendation Form state ", state)
     return {
         updateNewRecommendationFormData: state.newRecommendationForm,
         userId,

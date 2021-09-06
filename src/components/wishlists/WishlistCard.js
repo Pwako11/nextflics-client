@@ -14,7 +14,7 @@ const WishlistCard = ({wishlists, card, movies, history, deleteWishlist}) => {
         <div className="wishlistcard">
             <h5> Would you like to remove this movie from your list? </h5>
             
-                <li>{card.attributes.name} <br/>{<img src={moviePoster} alt={movieName} className="movie-poster"  width="250" height="325" />}   {<br/>} <button className="btn btn-secondary" onClick={()=>deleteWishlist(card, wishlists, history)}>Delete this Wishlist</button> </li>
+                <li>{card.attributes.name} <br/>{<img src={moviePoster} alt={movieName} className="movie-poster"  width="250" height="325" />}   {<br/>} <button className="btn btn-secondary" onClick={()=>deleteWishlist(card, wishlists, history)}>Delete this Wishlist</button>  <button className="btn btn-secondary" onClick={() => history.goBack()}>Back</button> </li>
         </div>
     )
 }
