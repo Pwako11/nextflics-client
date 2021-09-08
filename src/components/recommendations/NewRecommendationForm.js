@@ -4,30 +4,20 @@ import {updateNewRecommendationForm} from "../../actions/newRecommendationForm.j
 import {createRecommendation} from "../../actions/recommendations.js";
 
 const NewRecommendationForm = ({updateNewRecommendationFormData, history, location, movies, updateNewRecommendationForm, createRecommendation, userId, recommendations}) => {
-     console.log("recommendations form ", location)
     const movieId = location.state.movieID
     const recommendedMovie = movies.find(element => element.id == movieId);
     const moviePoster = recommendedMovie.attributes.poster_path
     const movieName = location.state.movieName
     const reviewId = location.state.reviewID
 
-    
-    console.log( "here is the location prop from state", location)
-    console.log( "here is the movieId", movieId)
-    console.log( "here is the movieName", movieName)
-  
     const {name, user_id, movie_id, review_id} = updateNewRecommendationFormData
 
     const handleChange=(event)=>{
-        console.log("trigger recommendationform handle change")
         const {name, value} = event.target
         updateNewRecommendationForm(name, value)
     } 
 
-    const handleSubmit = event =>{
-        
-        console.log("inside Handle submit", updateNewRecommendationForm)
-        
+    const handleSubmit = event =>{    
         event.preventDefault()
         createRecommendation({
             updateNewRecommendationFormData,
@@ -100,6 +90,5 @@ const mapStateToProps = state => {
     }
     
 }
-
 
 export default connect(mapStateToProps, {updateNewRecommendationForm, createRecommendation}) (NewRecommendationForm);
