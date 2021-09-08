@@ -140,7 +140,6 @@ export const deleteReview = (reviews, review, history) => {
     const reviewId = review.id 
 
     return dispatch => {
-        console.log("delete review step #2")
         return fetch(`http://localhost:3010/api/v1/reviews/${reviewId}`, {
             credentials: "include",
             method: "DELETE",
