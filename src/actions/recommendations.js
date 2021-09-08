@@ -93,20 +93,18 @@ export const createRecommendation = (recommendation ) => {
 
 export const deleteRecommendation = (recommendations, recommendation, history) => {
 
+    console.log({recommendations})
+    console.log({recommendation})
+    console.log({history})
     let updateRecommendations;
+   
     const recommendationId = recommendation.id 
-    console.log("recommendationId", recommendationId)
-
-    const baseUrl = `http://localhost:3010/api/v1/recommendations/${recommendationId}`
-
-    console.log("baseUrl", baseUrl)
-
     
     return dispatch => {
         console.log("fetch step 1")
     
-        return fetch (baseUrl, {
-          
+        return fetch(`http://localhost:3010/api/v1/recommendations/${recommendationId}`, {
+            credentials: "include",
             method: "DELETE",
             headers:{
                 "Content-Type": "application/json"
@@ -114,12 +112,16 @@ export const deleteRecommendation = (recommendations, recommendation, history) =
         })
         .then( resp => resp.json())
         .then( response =>{
+            console.log("step 2")
             if(response.error){
                 alert(response.error)
             }else{
+                console.log("step 3")
                 updateRecommendations = recommendations.filter(recommendation => recommendation.id === recommendationId ? false : true)
-                history.push(`/recommendations`)
+                console.log("step 4")
                 dispatch(deleteRecommendationSuccess(recommendationId))
+                console.log("step 5")
+                history.push(`/recommendations`)
             }
         }).then(()=>{
             return dispatch(setRecommendation(updateRecommendations))
