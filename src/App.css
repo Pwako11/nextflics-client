@@ -234,6 +234,7 @@ body, .card {
   position: relative;
   display: flex;
   left: 300px;
+  top: 50px; 
   width: 1800px;
   height: 40px;
   color: rgb(20, 20, 20);
@@ -247,10 +248,27 @@ body, .card {
   page-break-inside: avoid;
 }
 
+#movieButton {
+  position:absolute;
+  transition: .5s ease;
+  float: left;
+  left: 300px;
+  top: -60px;
+}
+
+#sortButton {
+  position:absolute;
+  transition: .5s ease;
+  float: left;
+  left: 500px;
+  top: -60px;  
+}
+
 #movie_showcase {
   position: -webkit-sticky;
   position: sticky;
-  top: 50px; left: 60px;
+  top: 50px; 
+  left: 60px;
   flex-direction: row;
   flex-wrap: wrap;
   width: 1000px;
