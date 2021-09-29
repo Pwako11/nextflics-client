@@ -15,17 +15,18 @@ const MovieShowcase = ({cards, loggedIn}) => {
 
     const aSortMovies = () => {
         console.log("you are in aSorted")
-       
-
-        const sortedCards = cards.sort((a,b) =>{
-            console.log({alphaCards})
-            if(a.attributes.title < b.attributes.title) return -1;
-            if(a.attributes.title > b.attributes.title) return 1;
-            return 0;
-        });
-        console.log({sortedCards})
-        alphaSortList(sortedCards)
+       if(alphaCards.length > 0){
+        alphaSortList([])
+       }else {
+        const sortedCards = [...cards].sort((a,b) =>{
         console.log({alphaCards})
+        if(a.attributes.title < b.attributes.title) return -1;
+        if(a.attributes.title > b.attributes.title) return 1;
+        return 0;
+            });
+    
+        alphaSortList(sortedCards)
+       } 
     }
 
     const movieCard = alphaCards.length > 0 ? alphaCards.map( function(list) {
@@ -41,7 +42,7 @@ const MovieShowcase = ({cards, loggedIn}) => {
 
     const movieButton = loggedIn ? optoinOne : <div id= "movie_showcase">{ movieCard }</div>  
 
-    const sortMoviesA = <button className="btn btn-secondary" id= "sortButton" onClick={aSortMovies}>Sort Movies A - Z </button>
+    const sortMoviesA = <button className="btn btn-secondary" id= "sortButton" onClick={aSortMovies}>sort movies A - Z </button>
  
     return (
        <div className= "movie-showcase" >
