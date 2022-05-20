@@ -5,6 +5,7 @@ import {connect} from "react-redux"
 import {Route, withRouter, Switch} from "react-router-dom"
 import {getCurrentUser} from "./actions/currentUser.js"
 import {getMovies} from "./actions/movies.js"
+import { updateMatchForm } from './actions/movieMatchForm';
 import Home from "./components/Home.js"
 import NavBar from "./components/NavBar.js"
 import Signup from "./components/users/Signup.js"
@@ -21,6 +22,7 @@ import Wishlist from "./components/wishlists/Wishlist.js"
 import NewWishlistForm from "./components/wishlists/NewWishlistForm.js"
 import WishlistCard from "./components/wishlists/WishlistCard.js"
 import MovieShowcase from "./components/movies/MovieShowcase.js" 
+import MovieMatch from "./components/movies/MovieMatch.js"
 import MainContainer from "./components/MainContainer.js"
 import {preSetFormDataForEdit} from "./actions/reviewForm.js"
 
@@ -31,29 +33,38 @@ class App extends React.Component{
     this.props.getMovies()
   }
 
+  componentDidUpdate(){
+
+    if(this.props.search !== "") { 
+      console.log("here is your search value", this.props.search)
+    }
+    
+  }
+
+
   render(){
     const {loggedIn, currentUser, wishlists, movie, recommendations, reviews, preSetFormDataForEdit} =this.props
 
-
     return (     
       <div className= "App">
-          <div className ="welcome">
-            <div className ="welcome-loggedIn" ><h3>{ currentUser ? `Welcome  ${currentUser.data.attributes.name}` : "" }</h3></div>
-            <nav class="navbar navbar-light">{ loggedIn ? <NavBar location={this.props.location}/> : null }</nav>
-          </div>
+        <div className ="top">
+          <div className ="welcome-loggedIn" ><h3>{ currentUser ? `Welcome  ${currentUser.data.attributes.name}` : "" }</h3></div>
+          <nav className="navbar navbar-light">{ loggedIn ? <NavBar location={this.props.location}/> : null }</nav>
+        </div>
       
-      <div className="main">
+        <div className="aside">
           <div className="routes">
             <Switch>
               <Route exact path='/' render={() => loggedIn ? <MainContainer /> : <Home />} />
-              <Route path='/signup' component={Signup}/>
-              <Route path='/login' component={Login}/> 
-              <Route path='/logout' component={Logout}/>
+              <Route exact path ='movie/search' component={MovieMatch} />
+              <Route exact path='/signup' component={Signup}/>
+              <Route exact path='/login' component={Login}/> 
+              <Route exact path='/logout' component={Logout}/>
               <Route exact path='/recommendations' component={Recommendations}/>
               <Route exact path='/recommendations/new' component={NewRecommendationForm}/>
               <Route exact path='/recommendations/:id' render={props =>{
-                const recommendation =  recommendations.find(rec => rec.id === props.match.params.id)
-                return<RecommendationCard recommendation={recommendation}{...props}/>
+                const recCard =  recommendations.find(rec => rec.id === props.match.params.id)
+                return<RecommendationCard recommendation={recCard}{...props}/>
                 }
               }/>
               <Route exact path='/recommendations/:id/edit' component={props =>{
@@ -64,7 +75,8 @@ class App extends React.Component{
               <Route exact path='/reviews' component={Reviews} />
               <Route exact path='/reviews/new' component={ReviewNewFormWrapper}/>
               <Route exact path='/reviews/:id' render={props =>{
-                const review =  reviews.find(review => review.id === props.match.params.id)            
+                const review =  reviews.find(review => review.id === props.match.params.id) 
+                console.log( "you hit the reviews card route")           
                 return<ReviewCard review={review}{...props}/>
                 }
               }/>
@@ -88,12 +100,17 @@ class App extends React.Component{
               }/>
             </Switch> 
           </div>
+        </div>
 
-          <div className="options">
-            <div className="movies" >
-                  <MovieShowcase cards= {movie} />
+        <div className="moviegrid">
+            
+            <div className="search">
+              <MovieMatch />
             </div>
-          </div>
+
+            <div className="collection">
+              <MovieShowcase cards= {movie} />
+            </div>
         </div>
 
       </div>
@@ -102,14 +119,16 @@ class App extends React.Component{
 }
 
 const mapStateToProps = state => {
+
   return {
     currentUser: state.currentUser,
     loggedIn: !!state.currentUser,
     recommendations: state.recommendation,
     reviews: state.review,
     wishlists: state.wishlist,
-    movie: state.movies
+    movie: state.movies,
+    search: state.movieMatchForm
   }
 }
 
-export default withRouter(connect(mapStateToProps, {getCurrentUser, getMovies, preSetFormDataForEdit}) (App));
+export default withRouter(connect(mapStateToProps, {getCurrentUser, getMovies, updateMatchForm, preSetFormDataForEdit}) (App));
