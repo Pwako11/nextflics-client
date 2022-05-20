@@ -5,12 +5,12 @@ import {createRecommendation} from "../../actions/recommendations.js";
 
 const NewRecommendationForm = ({updateNewRecommendationFormData, history, location, movies, updateNewRecommendationForm, createRecommendation, userId, recommendations}) => {
     const movieId = location.state.movieID
-    const recommendedMovie = movies.find(element => element.id == movieId);
+    const recommendedMovie = movies.find(element => element.id === movieId);
     const moviePoster = recommendedMovie.attributes.poster_path
     const movieName = location.state.movieName
     const reviewId = location.state.reviewID
 
-    const {name, user_id, movie_id, review_id} = updateNewRecommendationFormData
+    // const {name, user_id, movie_id, review_id} = updateNewRecommendationFormData
 
     const handleChange=(event)=>{
         const {name, value} = event.target
@@ -67,7 +67,7 @@ const NewRecommendationForm = ({updateNewRecommendationFormData, history, locati
                     onChange={handleChange}
                     value= {reviewId}
                 />
-                <input class="btn btn-secondary" type="submit" value="Add to Recommendations" />
+                <input className="btn btn-secondary" type="submit" value="Add to Recommendations" />
             </form>
 
             <p>If you would like to recommend a different movie return to the previos page</p>

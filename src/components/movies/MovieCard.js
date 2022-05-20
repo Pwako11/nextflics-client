@@ -35,6 +35,7 @@ const MovieCard = ({movies, card, history, updateLikes, loggedIn}) => {
 
             <h3 className="title">{card.attributes.title}</h3>
             <img src={moviePoster} alt={movieName} className="movie-poster"  width="250" height="325" />
+            <a id={card.attributes.title}>{card.attributes.title}</a>
             <h5>{card.attributes.genre}</h5>
             <h5>content rating: { 
                 card.attributes.adult === true ? 

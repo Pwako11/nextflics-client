@@ -7,11 +7,11 @@ const NavBar = ({loggedIn}) => {
 
   return (
     <nav className= "nav">
-      <NavLink exact class="nav-link" to="/" >Home </NavLink>
-      <NavLink exact class="nav-link" to="/wishlists" >My Wishlist</NavLink>
-      <NavLink exact class="nav-link" to="/recommendations">Recommendations</NavLink>
-      <NavLink exact class="nav-link" to="/reviews">My Reviews</NavLink>
-
+      <NavLink exact className="nav-link" to="/" >Home </NavLink>
+      <NavLink exact className="nav-link" to="/wishlists" >My Wishlist</NavLink>
+      <NavLink exact className="nav-link" to="/recommendations">Recommendations</NavLink>
+      <NavLink exact className="nav-link" to="/reviews">My Reviews</NavLink>
+      <NavLink exact className="nav-link" to="/movie/search">Search</NavLink>
       {loggedIn ? <Logout /> : null}
     </nav>
   )

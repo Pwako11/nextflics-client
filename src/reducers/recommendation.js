@@ -1,4 +1,4 @@
-export default (state = [], action) =>{
+export default function recommendation (state = [], action) {
     switch (action.type) {
         case "SET_RECOMMENDATION":
             return action.recommendation

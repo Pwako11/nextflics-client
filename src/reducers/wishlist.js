@@ -1,4 +1,4 @@
-export default (state = [], action) =>{
+export default function wishlist (state = [], action) {
     switch (action.type) {
         case "SET_WISHLIST":
             return action.wishlist

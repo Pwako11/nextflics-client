@@ -5,7 +5,7 @@ const initialState = {
     movie_id: "" 
 }
 
-export default (state = initialState, action) => {
+export default function newRecommendationForm (state = initialState, action) {
     switch (action.type){
         case "UPDATE_NEW_RECOMMENDATION_FORM":
             return {

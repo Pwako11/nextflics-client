@@ -1,4 +1,4 @@
-export default (state = [], action) =>{
+export default function movies (state = [], action) {
     switch (action.type) {
         case "SET_MOVIES":
             return action.movies

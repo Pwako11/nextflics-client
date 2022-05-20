@@ -33,7 +33,7 @@ class ReviewEditFormWrapper extends React.Component{
     } 
     
     render() {
-        const {history, handleSubmit} = this.props
+        // const {history, handleSubmit} = this.props
         return <ReviewForm editMode  handleSubmit={this.handleSubmit} />
     }
 };

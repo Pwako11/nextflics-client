@@ -23,13 +23,14 @@ const Signup = ({signupFormData, updateSignupForm,signup, history }) => {
             <p>Please complete the signup form to create your count</p>
     
             <form onSubmit={handleSubmit}>
-                <input class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="name" value= {signupFormData.name} name= "name" type="text" onChange={handleInputChange} />
-                <input class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="username" value= {signupFormData.username} name= "username" type="text" onChange= {handleInputChange} />
-                <input class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="email" value= {signupFormData.email} name= "email" type="text" onChange={handleInputChange} />
-                <input  type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="password" value= {signupFormData.password} name= "password" onChange= {handleInputChange} />
+                <input className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="name" value= {signupFormData.name} name= "name" type="text" onChange={handleInputChange} />
+                <input className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="username" value= {signupFormData.username} name= "username" type="text" onChange= {handleInputChange} />
+                <input className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="email" value= {signupFormData.email} name= "email" type="text" onChange={handleInputChange} />
+                <input className="form-control" aria-label="password" aria-describedby="inputGroup-sizing-default" placeholder="password" value= {signupFormData.password} name= "password" type="password" onChange= {handleInputChange} />
                 
-                <input class="btn btn-secondary" type="submit" value="Sing Up"/>
+                <input className="btn btn-secondary" type="submit" value="Sing Up"/>
             </form>
+
 
         </div>
     )

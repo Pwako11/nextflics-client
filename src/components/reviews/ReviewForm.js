@@ -4,7 +4,7 @@ import {updateReviewForm} from "../../actions/reviewForm.js";
 
 const ReviewForm = ({formData, reviews, updateReviewForm, userId, handleSubmit, editMode}) => {
 
-    const {content, rate, user_id, movie_id} = formData
+    const {content, user_id, movie_id} = formData
 
     const handleChange=(event)=>{
         const {name, value} = event.target
@@ -17,11 +17,11 @@ const ReviewForm = ({formData, reviews, updateReviewForm, userId, handleSubmit, 
             handleSubmit(formData, reviews, userId)
             } } >
             <label>
-                <textarea  class= "form-control" name= "content" placeholder= "Type your review here " onChange={handleChange} value= {content} ></textarea>
+                <textarea  className= "form-control" name= "content" placeholder= "Type your review here " onChange={handleChange} value= {content} ></textarea>
             </label>
             
             <br/>
-            <select class= "form-control" name="rate" placeholder= "Rate this movie " onChange={handleChange}>
+            <select className= "form-control" name="rate" placeholder= "Rate this movie " onChange={handleChange}>
                 <option value= ""> select a movie rate ...</option>
                 <option value= "0"> Zero </option>
                 <option value= "1"> 1 star</option>
@@ -32,7 +32,7 @@ const ReviewForm = ({formData, reviews, updateReviewForm, userId, handleSubmit, 
             </select>
             <br/>
             <input
-                class= "form-control"
+                className= "form-control"
                 type="hidden"
                 placeholder = "User ID "
                 name="user_id"
@@ -40,7 +40,7 @@ const ReviewForm = ({formData, reviews, updateReviewForm, userId, handleSubmit, 
                 value= {user_id}
             />
             <input
-                class= "form-control"
+                className= "form-control"
                 type="hidden"
                 placeholder= "Movie ID"
                 name="movie_id"
@@ -48,7 +48,7 @@ const ReviewForm = ({formData, reviews, updateReviewForm, userId, handleSubmit, 
                 value= {movie_id}
             />
             <br/>
-            <input class="btn btn-secondary" type="submit" value={editMode ? "update review" : "Post your review"}/>
+            <input className="btn btn-secondary" type="submit" value={editMode ? "update review" : "Post your review"}/>
             <br/>
         </form>
         

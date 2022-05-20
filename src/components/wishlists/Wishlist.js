@@ -1,11 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
-import movies from '../../reducers/movies'
+// import movies from '../../reducers/movies'
 
-const wishlist = ({wishlists, history, movies}) => {
-
-    console.log({wishlists})
+const wishlist = ({wishlists, history}) => {
     let path; 
     
     if (typeof history === 'undefined'){
@@ -22,12 +20,12 @@ const wishlist = ({wishlists, history, movies}) => {
     return (
 
         <div className= "wishlist">
-            <div class="container-xxl">
+            <div className="container-xxl">
                 {wishlistHeading}
                 <ol>
                     {wishlistCards}
                 </ol>
-                </div>
+            </div>
         </div>
     )
 }

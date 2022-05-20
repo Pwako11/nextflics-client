@@ -6,7 +6,7 @@ import {deleteReview} from '../../actions/reviews';
 const ReviewCard = (props) =>{
  
     const movieID = props.review.relationships.movie.data.id;
-    const reviewedMovie = props.movies.find(element => element.id == movieID);
+    const reviewedMovie = props.movies.find(element => element.id === movieID);
     const moviePoster = reviewedMovie.attributes.poster_path
     const movieName = reviewedMovie.attributes.title
     const reviewID = props.review.id

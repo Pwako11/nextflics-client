@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import {connect} from 'react-redux';
 import MovieCard from './MovieCard.js';
+import MovieSearch from './MovieMatch.js'
 
-const MovieShowcase = ({cards, loggedIn}) => { 
-    console.log({cards})
+const MovieShowcase = ({cards, loggedIn, search}) => { 
+    console.log("in MovieShowcase" , {search})
     const [showMovies, setShowMovies] = useState(false);
     const [alphaCards, alphaSortList] = useState([]);
-   
-    console.log({alphaCards})
    
     const handleChange = () =>{
         setShowMovies(!showMovies)
@@ -44,18 +43,28 @@ const MovieShowcase = ({cards, loggedIn}) => {
 
     const sortMoviesA = <button className="btn btn-secondary" id= "sortButton" onClick={aSortMovies}>sort movies A - Z </button>
  
+    // const searchResults = for( var key in search) {
+    //     if(search[key][content] !== ''){
+    //         return true; 
+    //     }else{
+    //         return false; 
+    //     }
+    // }
+
+
     return (
-       <div className= "movie-showcase" >
-            {movieButton}{sortMoviesA}
+        <div className= "movie-showcase" >    
+            {movieButton}{sortMoviesA}                    
         </div>
     )
 }
 
 const mapStateToProps = state => {
-
+    console.log(state)
     return {
         state, 
-        loggedIn: !!state.currentUser
+        loggedIn: !!state.currentUser,
+        search: state.movieMatchForm
     }
 }
 export default connect(mapStateToProps) (MovieShowcase)

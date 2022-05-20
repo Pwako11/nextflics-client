@@ -8,7 +8,7 @@ const NewWishlistForm = ({updateNewWishlistFormData, history, location, updateNe
     const movieId = location.state.movieID
     const movieName = location.state.movieName
 
-    const {name, user_id, movie_id} = updateNewWishlistFormData
+    // const {name, user_id, movie_id} = updateNewWishlistFormData
 
      const handleChange=(event)=>{
         console.log("trigger wishlistform handle change")

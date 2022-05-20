@@ -7,6 +7,7 @@ import wishlist from './reducers/wishlist.js';
 import signupForm from  './reducers/signupForm.js';
 import newWishlistForm from './reducers/newWishlistForm.js';
 import movieReducer from './reducers/movies.js';
+import movieMatchForm from './reducers/movieMatchForm.js'
 import review from './reducers/review.js';
 import reviewForm from './reducers/reviewForm.js';
 import recommendation from './reducers/recommendation.js';
@@ -23,6 +24,7 @@ const reducer = combineReducers({
     newRecommendationForm,
     review, 
     reviewForm,
+    movieMatchForm,
     movies: movieReducer
   })
   
